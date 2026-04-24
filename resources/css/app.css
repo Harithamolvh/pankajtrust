@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .section-mesh {
+        background: radial-gradient(ellipse at 20% 30%, #FDF6EC 0%, transparent 60%),
+                    radial-gradient(ellipse at 80% 70%, #F0EBE3 0%, transparent 60%),
+                    radial-gradient(ellipse at 50% 50%, #FFF8F0 0%, transparent 80%);
+        background-size: 200% 200%;
+        animation: mesh-drift 12s ease infinite;
+    }
+
+    .glass-shimmer {
+        position: relative;
+        overflow: hidden;
+    }
+    .glass-shimmer::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(232,135,42,0.15), transparent);
+        animation: shimmer 2s ease 0.5s 1;
+        pointer-events: none;
+    }
+
+    .quote-mark {
+        font-family: 'Playfair Display', serif;
+        font-size: 18rem;
+        color: #C9A84C;
+        line-height: 0;
+        animation: quote-breathe 4s ease-in-out infinite;
+        user-select: none;
+        pointer-events: none;
+    }
+}
