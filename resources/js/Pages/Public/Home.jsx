@@ -232,33 +232,7 @@ export default function Home({ recentRecipients, recentPosts, stats }) {
                 </>
             )}
 
-            {/* Donate CTA Banner */}
-            <section className={`bg-rust text-cream text-center relative overflow-hidden py-32 ${(!recentPosts || recentPosts.length === 0) ? 'border-none' : 'border-t-4 border-saffron'}`}>
-                <div className="absolute inset-0 bg-gradient-to-b from-rust/95 to-charcoal/95 z-10"></div>
-                <img src="/images/donate-bg.jpg" onError={(e) => { e.target.onerror = null; e.target.src = "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=2000"; }} alt="Donate Background" className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" />
-                
-                <div className="max-w-4xl mx-auto px-4 relative z-20">
-                    <ScrollReveal direction="up">
-                        <h2 className="font-display font-black text-5xl md:text-6xl mb-6 text-white drop-shadow-md">Your Contribution Changes a Life</h2>
-                        <p className="font-body text-xl md:text-2xl text-cream/90 mb-12 leading-relaxed drop-shadow max-w-3xl mx-auto">
-                            Join us in our mission to turn potential into possibility. Even a modest contribution provides a great help for their studies.
-                        </p>
-                        
-                        <div className="mb-12">
-                            <Link 
-                                href={route('donate')} 
-                                className="bg-saffron text-white px-12 py-5 rounded-sm font-sans font-bold text-lg hover:bg-white hover:text-saffron transition-all duration-300 shadow-glow-saffron inline-block hover:-translate-y-1"
-                            >
-                                Make a Donation Today
-                            </Link>
-                        </div>
 
-                        <p className="font-sans text-sm text-gold font-medium bg-black/30 backdrop-blur-md inline-block px-6 py-3 rounded-full border border-gold/20">
-                            {settings.donate_80g_note}
-                        </p>
-                    </ScrollReveal>
-                </div>
-            </section>
         </PublicLayout>
     );
 }

@@ -7,8 +7,8 @@ export default function Index({ posts }) {
     return (
         <PublicLayout title="News & Updates">
             {/* Page Header */}
-            <div className="bg-forest text-cream py-16 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-saffron/20 to-transparent"></div>
+            <div className="bg-forest text-cream pt-32 pb-16 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-rust/20 to-transparent"></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
                     <h1 className="font-display font-black text-4xl md:text-5xl mb-4">News & Updates</h1>
                     <p className="font-body text-xl text-cream/80 max-w-2xl mx-auto">

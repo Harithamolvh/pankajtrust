@@ -33,7 +33,7 @@ export default function Donate() {
     return (
         <PublicLayout title="Make a Donation">
             {/* Page Header */}
-            <div className="bg-forest text-cream py-24 md:py-32 relative overflow-hidden border-b-4 border-saffron -mt-20">
+            <div className="bg-forest text-cream pt-32 md:pt-40 pb-20 relative overflow-hidden border-b-4 border-saffron">
                 <img 
                     src="/images/donate-bg.jpg" 
                     onError={(e) => { e.target.onerror = null; e.target.src = "https://images.unsplash.com/photo-1544207936-7c95acc645d9?auto=format&fit=crop&q=80&w=2000"; }}
@@ -167,13 +167,13 @@ export default function Donate() {
                                     <p className="font-sans text-sm text-charcoal/70 mb-4">
                                         After making a donation, please notify us so we can acknowledge your receipt.
                                     </p>
-                                    <Link 
-                                        href={route('contact')} 
+                                    <a 
+                                        href={`mailto:${settings.contact_email}`} 
                                         className="inline-flex items-center font-sans font-bold text-white bg-forest hover:bg-saffron px-6 py-3 rounded-full transition-colors uppercase tracking-widest text-xs shadow-md"
                                     >
                                         <FileText size={16} className="mr-2" />
-                                        Notify Us About Donation
-                                    </Link>
+                                        Email Us
+                                    </a>
                                 </div>
                             </div>
                         </ScrollReveal>

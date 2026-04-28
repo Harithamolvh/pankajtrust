@@ -1,7 +1,7 @@
 import React from 'react';
 import { Head, useForm, Link } from '@inertiajs/react';
 import PublicLayout from '@/Components/Layout/PublicLayout';
-import RecipientCard from '@/Components/Public/RecipientCard';
+
 import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Index({ recipients, years, filters }) {
@@ -26,8 +26,8 @@ export default function Index({ recipients, years, filters }) {
     return (
         <PublicLayout title="Our Scholars">
             {/* Page Header */}
-            <div className="bg-forest text-cream py-16 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-saffron/20 to-transparent"></div>
+            <div className="bg-forest text-cream pt-32 pb-16 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-sage/20 to-transparent"></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
                     <h1 className="font-display font-black text-4xl md:text-5xl mb-4">Meet Our Scholars</h1>
                     <p className="font-body text-xl text-cream/80 max-w-2xl mx-auto">
@@ -86,10 +86,48 @@ export default function Index({ recipients, years, filters }) {
                 {/* Grid */}
                 {recipients.data.length > 0 ? (
                     <>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                            {recipients.data.map((recipient) => (
-                                <RecipientCard key={recipient.id} recipient={recipient} />
-                            ))}
+                        <div className="bg-white rounded shadow-sm border border-mist overflow-hidden">
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left font-body">
+                                    <thead className="bg-mist text-charcoal/80 font-sans text-sm uppercase tracking-wider border-b border-mist/80">
+                                        <tr>
+                                            <th className="px-6 py-4 font-bold">Scholar Name</th>
+                                            <th className="px-6 py-4 font-bold">School / District</th>
+                                            <th className="px-6 py-4 font-bold">Course / College</th>
+                                            <th className="px-6 py-4 font-bold">Year</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-mist">
+                                        {recipients.data.map((recipient) => (
+                                            <tr key={recipient.id} className="hover:bg-cream transition-colors">
+                                                <td className="px-6 py-4">
+                                                    <div className="flex items-center gap-4">
+                                                        <div className="w-12 h-12 rounded-full bg-saffron/10 text-saffron flex items-center justify-center font-bold font-display shrink-0 overflow-hidden border border-saffron/20">
+                                                            {recipient.photo ? (
+                                                                <img src={recipient.photo} alt={recipient.name} className="w-full h-full object-cover" />
+                                                            ) : (
+                                                                recipient.name.charAt(0)
+                                                            )}
+                                                        </div>
+                                                        <span className="font-bold text-forest text-lg">{recipient.name}</span>
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    <div className="text-charcoal font-medium">{recipient.school?.name || '-'}</div>
+                                                    <div className="text-sm text-charcoal/60 mt-0.5">{recipient.district || recipient.school?.district}</div>
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    <div className="text-charcoal font-medium">{recipient.course}</div>
+                                                    <div className="text-sm text-charcoal/60 mt-0.5">{recipient.college}</div>
+                                                </td>
+                                                <td className="px-6 py-4 font-bold text-saffron whitespace-nowrap">
+                                                    {recipient.year}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
                         {/* Pagination */}

@@ -38,7 +38,7 @@ export default function Footer() {
                             <li><Link href={route('schools')} className="text-mist hover:text-saffron transition-colors">Partner Schools</Link></li>
                             <li><Link href={route('donors')} className="text-mist hover:text-saffron transition-colors">Our Donors</Link></li>
                             <li><Link href={route('news.index')} className="text-mist hover:text-saffron transition-colors">News & Updates</Link></li>
-                            <li><Link href={route('contact')} className="text-mist hover:text-saffron transition-colors">Contact Us</Link></li>
+
                             <li><Link href={route('donate')} className="text-mist font-semibold hover:text-saffron transition-colors">Donate Now</Link></li>
                         </ul>
                     </div>

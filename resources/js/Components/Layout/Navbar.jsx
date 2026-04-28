@@ -19,7 +19,7 @@ export default function Navbar() {
         { name: 'Recipients', href: route('recipients.index') },
         { name: 'Gallery', href: route('gallery') },
         { name: 'News', href: route('news.index') },
-        { name: 'Contact', href: route('contact') },
+
     ];
 
     return (
