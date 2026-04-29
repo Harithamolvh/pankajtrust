@@ -47,16 +47,12 @@ export default function StatStrip({ stats }) {
     <div className="relative z-30 px-6 lg:px-16" style={{ marginTop: '-20px' }}>
       <div
         style={{
-          background: 'rgba(253, 246, 236, 0.18)',
-          backdropFilter: 'blur(40px)',
-          WebkitBackdropFilter: 'blur(40px)',
+          background: 'white',
           borderRadius: '16px',
-          border: '1px solid rgba(232, 135, 42, 0.5)',
+          border: '1px solid rgba(232, 135, 42, 0.2)',
           boxShadow: `
-            inset 0 1px 0 rgba(255, 255, 255, 0.3),
-            inset 0 -1px 0 rgba(255, 255, 255, 0.05),
-            0 8px 32px rgba(0, 0, 0, 0.25),
-            0 0 0 1px rgba(232, 135, 42, 0.2)
+            0 8px 32px rgba(0, 0, 0, 0.08),
+            0 2px 8px rgba(0, 0, 0, 0.04)
           `,
           overflow: 'hidden',
           display: isMobile ? 'grid' : 'flex',
@@ -106,8 +102,7 @@ export default function StatStrip({ stats }) {
                 fontSize: '42px',
                 fontWeight: '600',
                 fontStyle: 'italic',
-                color: '#FFFFFF',
-                textShadow: '0 0 20px rgba(232,135,42,0.8), 0 2px 4px rgba(0,0,0,0.5)',
+                color: '#E8872A',
                 lineHeight: 1,
                 marginBottom: '8px',
                 letterSpacing: '-0.5px',
@@ -122,7 +117,7 @@ export default function StatStrip({ stats }) {
                 fontWeight: '700',
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: '#1B4332',
+                color: '#1C1917',
                 marginBottom: '4px',
               }}>
                 {stat.label}
@@ -132,7 +127,7 @@ export default function StatStrip({ stats }) {
               <p style={{
                 fontFamily: '"DM Sans", sans-serif',
                 fontSize: '11px',
-                color: 'rgba(27, 67, 50, 0.8)',
+                color: 'rgba(28, 25, 23, 0.6)',
               }}>
                 {stat.sub}
               </p>

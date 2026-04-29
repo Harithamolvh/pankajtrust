@@ -18,21 +18,32 @@ export default function HeroParticles() {
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        const particles = Array.from({ length: 80 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            r: Math.random() * 2.5 + 0.5,
-            speed: Math.random() * 0.6 + 0.2,
-            opacity: Math.random() * 0.6 + 0.2,
-            drift: (Math.random() - 0.5) * 0.4,
-        }));
+        const colors = [
+            [232, 135, 42],  // saffron/orange
+            [232, 135, 42],  // saffron/orange (weighted)
+            [76, 175, 80],   // leaf green
+            [201, 168, 76],  // gold
+        ];
+
+        const particles = Array.from({ length: 60 }, () => {
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 3 + 0.5,
+                speed: Math.random() * 0.4 + 0.15,
+                opacity: Math.random() * 0.35 + 0.1,
+                drift: (Math.random() - 0.5) * 0.3,
+                color,
+            };
+        });
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => {
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(232, 135, 42, ${p.opacity})`; // saffron
+                ctx.fillStyle = `rgba(${p.color[0]}, ${p.color[1]}, ${p.color[2]}, ${p.opacity})`;
                 ctx.fill();
                 p.y -= p.speed;
                 p.x += p.drift;

@@ -1,0 +1,17 @@
+{
+    "_hash": "7756aa853f7ec285cef10388040fe06210d122303f8a45558ce64833a3bd243e",
+    "patches": {
+        "nesbot/carbon": [
+            {
+                "package": "nesbot/carbon",
+                "description": "PHP 8.5 compat: CarbonPeriod::getIterator() return type must be Iterator not Generator",
+                "url": "patches/carbon-php85-getiterator.patch",
+                "sha256": "44cbdc36f337e2e34531cf16bf03aa8751ac5af660e22dec63bce88890339d62",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ]
+    }
+}

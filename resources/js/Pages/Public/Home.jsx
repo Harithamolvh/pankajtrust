@@ -61,7 +61,7 @@ export default function Home({ recentRecipients, recentPosts, stats }) {
                     <ScrollReveal delay={0.2} direction="up">
                         <div className="relative">
                             <span className="absolute -top-12 -left-8 quote-mark">"</span>
-                            <p className="font-display italic text-2xl md:text-4xl text-forest leading-relaxed relative z-10 px-8">
+                            <p className="font-display italic text-2xl md:text-4xl text-charcoal leading-relaxed relative z-10 px-8">
                                 There are too many bright talented young children who are unable to receive higher education because of their family's poor financial background. With some financial assistance, they can do better in life and serve society much better.
                             </p>
                             <span className="absolute -bottom-24 -right-8 quote-mark">"</span>
@@ -87,7 +87,7 @@ export default function Home({ recentRecipients, recentPosts, stats }) {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                         <StepCard delay={0.15}>
                             <div className="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-display font-black text-mist/60 group-hover:text-saffron/10 transition-colors pointer-events-none">1</div>
-                            <h3 className="font-sans font-bold text-xl text-forest mb-4 relative z-10">Schools Nominate</h3>
+                            <h3 className="font-sans font-bold text-xl text-saffron mb-4 relative z-10">Schools Nominate</h3>
                             <p className="font-body text-charcoal/80 relative z-10">
                                 Partner government schools in Ernakulam and Idukki districts nominate students based on academic merit and financial need.
                             </p>
@@ -95,7 +95,7 @@ export default function Home({ recentRecipients, recentPosts, stats }) {
                         
                         <StepCard delay={0.3}>
                             <div className="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-display font-black text-mist/60 group-hover:text-saffron/10 transition-colors pointer-events-none">2</div>
-                            <h3 className="font-sans font-bold text-xl text-forest mb-4 relative z-10">Rigorous Selection</h3>
+                            <h3 className="font-sans font-bold text-xl text-saffron mb-4 relative z-10">Rigorous Selection</h3>
                             <p className="font-body text-charcoal/80 relative z-10">
                                 50% academic merit + 50% financial need criteria, thoroughly verified by Trust members through local enquiry and field visits.
                             </p>
@@ -103,7 +103,7 @@ export default function Home({ recentRecipients, recentPosts, stats }) {
                         
                         <StepCard delay={0.45}>
                             <div className="absolute top-0 right-0 -mr-4 -mt-4 text-9xl font-display font-black text-mist/60 group-hover:text-saffron/10 transition-colors pointer-events-none">3</div>
-                            <h3 className="font-sans font-bold text-xl text-forest mb-4 relative z-10">Multi-Year Support</h3>
+                            <h3 className="font-sans font-bold text-xl text-saffron mb-4 relative z-10">Multi-Year Support</h3>
                             <p className="font-body text-charcoal/80 relative z-10">
                                 Financial assistance provided consistently for the entire 3 or 4-year degree course, subject to satisfactory academic progress.
                             </p>
@@ -120,12 +120,12 @@ export default function Home({ recentRecipients, recentPosts, stats }) {
                         <ScrollReveal>
                             <div className="flex flex-col md:flex-row justify-between items-end mb-16">
                                 <div>
-                                    <h2 className="font-display font-bold text-4xl text-forest mb-4">Latest Scholars</h2>
+                                    <h2 className="font-display font-bold text-4xl text-charcoal mb-4">Latest Scholars</h2>
                                     <div className="w-16 h-1 bg-saffron"></div>
                                 </div>
                                 <Link 
-                                    href={route('recipients.index')} 
-                                    className="mt-6 md:mt-0 font-sans font-bold text-saffron hover:text-forest transition-colors flex items-center group uppercase tracking-widest text-sm"
+                                    href={route('recipients')} 
+                                    className="mt-6 md:mt-0 font-sans font-bold text-saffron hover:text-leafDark transition-colors flex items-center group uppercase tracking-widest text-sm"
                                 >
                                     Meet All Recipients <span className="ml-2 transition-transform group-hover:translate-x-2">→</span>
                                 </Link>
@@ -144,8 +144,8 @@ export default function Home({ recentRecipients, recentPosts, stats }) {
             )}
 
             {/* Founder Section */}
-            <section className={`bg-forest relative overflow-hidden pt-32 ${(!recentPosts || recentPosts.length === 0) ? 'pb-0' : 'pb-32'}`}>
-                <div className="absolute inset-0 bg-gradient-to-br from-forest via-forest to-charcoal"></div>
+            <section className={`bg-charcoal relative overflow-hidden pt-32 ${(!recentPosts || recentPosts.length === 0) ? 'pb-0' : 'pb-32'}`}>
+                <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-charcoal to-[#2a2520]"></div>
                 <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] mix-blend-overlay"></div>
                 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -212,7 +212,7 @@ export default function Home({ recentRecipients, recentPosts, stats }) {
                                         <div className="w-16 h-1 bg-saffron"></div>
                                     </div>
                                     <Link 
-                                        href={route('news.index')} 
+                                        href={route('news')} 
                                         className="mt-6 md:mt-0 font-sans font-bold text-saffron hover:text-forest transition-colors flex items-center group uppercase tracking-widest text-sm"
                                     >
                                         View All News <span className="ml-2 transition-transform group-hover:translate-x-2">→</span>

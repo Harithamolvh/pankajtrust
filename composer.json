@@ -12,10 +12,12 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
         "maatwebsite/excel": "^3.1",
+        "nesbot/carbon": "3.11.4",
         "spatie/laravel-medialibrary": "^11.21",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
+        "cweagans/composer-patches": "^2.0",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.4",
         "laravel/pail": "^1.2.5",
@@ -75,6 +77,11 @@
     "extra": {
         "laravel": {
             "dont-discover": []
+        },
+        "patches": {
+            "nesbot/carbon": {
+                "PHP 8.5 compat: CarbonPeriod::getIterator() return type must be Iterator not Generator": "patches/carbon-php85-getiterator.patch"
+            }
         }
     },
     "config": {
@@ -83,7 +90,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "cweagans/composer-patches": true
         }
     },
     "minimum-stability": "stable",

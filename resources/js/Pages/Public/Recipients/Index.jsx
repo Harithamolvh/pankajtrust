@@ -12,14 +12,14 @@ export default function Index({ recipients, years, filters }) {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        get(route('recipients.index'), { preserveState: true });
+        get(route('recipients'), { preserveState: true });
     };
 
     const handleFilterChange = (key, value) => {
         setData(key, value);
         // Delay form submission slightly to let state update
         setTimeout(() => {
-            get(route('recipients.index'), { preserveState: true, data: { ...data, [key]: value } });
+            get(route('recipients'), { preserveState: true, data: { ...data, [key]: value } });
         }, 10);
     };
 
@@ -163,7 +163,7 @@ export default function Index({ recipients, years, filters }) {
                             <button 
                                 onClick={() => {
                                     setData({ search: '', year: '' });
-                                    get(route('recipients.index'));
+                                    get(route('recipients'));
                                 }}
                                 className="mt-6 text-saffron font-bold text-sm uppercase tracking-wider hover:underline"
                             >

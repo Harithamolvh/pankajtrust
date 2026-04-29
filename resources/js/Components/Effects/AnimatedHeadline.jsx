@@ -5,7 +5,7 @@ export default function AnimatedHeadline({ text }) {
     const words = text.split(' ');
     
     return (
-        <h1 className="font-display font-black text-5xl md:text-7xl text-cream mb-6 leading-tight drop-shadow-md">
+        <h1 className="font-display font-black text-4xl md:text-7xl text-charcoal mb-6 leading-tight">
             {words.map((word, i) => (
                 <motion.span
                     key={i}

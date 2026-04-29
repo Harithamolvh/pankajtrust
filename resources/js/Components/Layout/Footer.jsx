@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 
 export default function Footer() {
     return (
-        <footer className="bg-forest text-cream py-16 border-t-4 border-saffron">
+        <footer className="bg-charcoal text-cream py-16 border-t-4 border-saffron">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                     <div className="col-span-1 md:col-span-1">
@@ -26,8 +26,8 @@ export default function Footer() {
                         <ul className="space-y-3 font-sans text-sm">
                             <li><Link href={route('home')} className="text-mist hover:text-saffron transition-colors">Home</Link></li>
                             <li><Link href={route('about')} className="text-mist hover:text-saffron transition-colors">About the Trust</Link></li>
-                            <li><Link href={route('scholarship')} className="text-mist hover:text-saffron transition-colors">Scholarship Program</Link></li>
-                            <li><Link href={route('recipients.index')} className="text-mist hover:text-saffron transition-colors">Meet the Recipients</Link></li>
+                            <li><Link href={route('scholarships')} className="text-mist hover:text-saffron transition-colors">Scholarship Program</Link></li>
+                            <li><Link href={route('recipients')} className="text-mist hover:text-saffron transition-colors">Meet the Recipients</Link></li>
                             <li><Link href={route('gallery')} className="text-mist hover:text-saffron transition-colors">Photo Gallery</Link></li>
                         </ul>
                     </div>
@@ -37,7 +37,7 @@ export default function Footer() {
                         <ul className="space-y-3 font-sans text-sm">
                             <li><Link href={route('schools')} className="text-mist hover:text-saffron transition-colors">Partner Schools</Link></li>
                             <li><Link href={route('donors')} className="text-mist hover:text-saffron transition-colors">Our Donors</Link></li>
-                            <li><Link href={route('news.index')} className="text-mist hover:text-saffron transition-colors">News & Updates</Link></li>
+                            <li><Link href={route('news')} className="text-mist hover:text-saffron transition-colors">News & Updates</Link></li>
 
                             <li><Link href={route('donate')} className="text-mist font-semibold hover:text-saffron transition-colors">Donate Now</Link></li>
                         </ul>

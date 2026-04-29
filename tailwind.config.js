@@ -21,6 +21,9 @@ export default {
                 mist: '#F0EBE3',
                 rust: '#B5451B',
                 sage: '#4A7C59',
+                leaf: '#4CAF50',
+                leafLight: '#E8F5E9',
+                leafDark: '#2E7D32',
                 // Admin tokens
                 adminBg: '#F5F0E8',
                 adminTh: '#F9F6F1',

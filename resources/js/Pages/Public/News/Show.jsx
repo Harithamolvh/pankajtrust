@@ -10,7 +10,7 @@ export default function Show({ post, relatedPosts }) {
             <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 
                 <Link 
-                    href={route('news.index')} 
+                    href={route('news')} 
                     className="inline-flex items-center font-sans font-bold text-sm text-charcoal/60 hover:text-saffron mb-8 transition-colors uppercase tracking-wider group"
                 >
                     <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-1 transition-transform" /> Back to News
