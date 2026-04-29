@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\GalleryImage;
 use App\Models\NewsPost;
 use App\Models\Recipient;
 use App\Models\School;
@@ -22,6 +23,7 @@ class HomeController extends Controller
                 ->latest('published_at')
                 ->take(3)
                 ->get(['id', 'title', 'slug', 'excerpt', 'cover_image', 'published_at']),
+            'gallery' => GalleryImage::where('active', true)->orderBy('sort_order')->take(8)->get(),
             'stats' => [
                 'students' => Recipient::count(),
                 'schools' => School::where('active', true)->count(),

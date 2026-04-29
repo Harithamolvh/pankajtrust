@@ -72,21 +72,21 @@ export default function AdminLayout({ title, children, breadcrumbs = [] }) {
                     </NavSection>
 
                     <NavSection title="Scholarship">
-                        <NavItem href="#" icon={Users} label="Recipients" active={route().current('admin.recipients.*')} />
-                        <NavItem href="#" icon={School} label="Schools" active={route().current('admin.schools.*')} />
-                        <NavItem href="#" icon={Award} label="Donors" active={route().current('admin.donors.*')} />
+                        <NavItem href={route('admin.recipients.index')} icon={Users} label="Recipients" active={route().current('admin.recipients.*')} />
+                        <NavItem href={route('admin.schools.index')} icon={School} label="Schools" active={route().current('admin.schools.*')} />
+                        <NavItem href={route('admin.donors.index')} icon={Award} label="Donors" active={route().current('admin.donors.*')} />
                     </NavSection>
 
                     <NavSection title="Content">
-                        <NavItem href="#" icon={Images} label="Gallery" active={route().current('admin.gallery.*')} />
-                        <NavItem href="#" icon={Newspaper} label="News & Updates" active={route().current('admin.news.*')} />
-                        <NavItem href="#" icon={Mail} label="Messages" active={route().current('admin.messages.*')} badge={unreadMessagesCount} />
+                        <NavItem href={route('admin.gallery.index')} icon={Images} label="Gallery" active={route().current('admin.gallery.*')} />
+                        <NavItem href={route('admin.news.index')} icon={Newspaper} label="News & Updates" active={route().current('admin.news.*')} />
+                        <NavItem href={route('admin.messages.index')} icon={Mail} label="Messages" active={route().current('admin.messages.*')} badge={unreadMessagesCount} />
                     </NavSection>
 
                     <NavSection title="Settings">
-                        <NavItem href="#" icon={Settings} label="Site Settings" active={route().current('admin.settings.*')} />
+                        <NavItem href={route('admin.settings.index')} icon={Settings} label="Site Settings" active={route().current('admin.settings.*')} />
                         {auth.user.is_admin && (
-                            <NavItem href="#" icon={UserCog} label="Admin Users" active={route().current('admin.users.*')} />
+                            <NavItem href={route('admin.users.index')} icon={UserCog} label="Admin Users" active={route().current('admin.users.*')} />
                         )}
                     </NavSection>
                 </div>

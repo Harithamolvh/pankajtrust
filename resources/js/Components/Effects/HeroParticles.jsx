@@ -19,10 +19,9 @@ export default function HeroParticles() {
         resizeCanvas();
 
         const colors = [
-            [232, 135, 42],  // saffron/orange
-            [232, 135, 42],  // saffron/orange (weighted)
-            [76, 175, 80],   // leaf green
+            [232, 135, 42],  // saffron
             [201, 168, 76],  // gold
+            [255, 255, 255], // white
         ];
 
         const particles = Array.from({ length: 60 }, () => {

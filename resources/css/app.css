@@ -33,4 +33,32 @@
         user-select: none;
         pointer-events: none;
     }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    .glass-card-light {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.07);
+    }
+
+    .glow-saffron {
+        box-shadow: 0 0 20px rgba(232, 135, 42, 0.2);
+    }
+
+    .glow-gold {
+        box-shadow: 0 0 25px rgba(201, 168, 76, 0.3);
+    }
+
+    .text-glow {
+        text-shadow: 0 0 10px rgba(232, 135, 42, 0.5);
+    }
 }
