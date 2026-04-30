@@ -3,6 +3,24 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="Dr. Pankaj Educational and Charitable Trust">
+        <meta name="description" content="Empowering bright, financially disadvantaged students in Kerala since 1999 through merit-cum-means scholarships.">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:title" content="Dr. Pankaj Educational and Charitable Trust">
+        <meta property="og:description" content="Empowering bright, financially disadvantaged students in Kerala since 1999 through merit-cum-means scholarships.">
+        <meta property="og:image" content="{{ asset('images/trust-banner1.png') }}">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="{{ url()->current() }}">
+        <meta property="twitter:title" content="Dr. Pankaj Educational and Charitable Trust">
+        <meta property="twitter:description" content="Empowering bright, financially disadvantaged students in Kerala since 1999 through merit-cum-means scholarships.">
+        <meta property="twitter:image" content="{{ asset('images/trust-banner1.png') }}">
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
