@@ -55,8 +55,8 @@ export default function StatStrip({ stats }) {
   ];
 
   return (
-    <div className="relative z-50 -mt-32 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="relative z-50 -mt-12 md:-mt-32 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {statItems.map((stat, i) => (
           <motion.div
             key={i}
@@ -69,12 +69,12 @@ export default function StatStrip({ stats }) {
             {/* Accent Corner Glow */}
             <div className="absolute -right-8 -top-8 w-24 h-24 bg-saffron/5 rounded-full blur-2xl group-hover:bg-saffron/10 transition-colors" />
             
-            <div className="p-8 h-full flex flex-col justify-between relative z-10">
-              <div className="flex justify-between items-start">
-                <div className="p-3.5 rounded-2xl bg-mist border border-charcoal/5 group-hover:scale-110 group-hover:rotate-3 transition-transform shadow-inner">
+            <div className="p-8 h-full flex flex-col justify-between relative z-10 text-center sm:text-left">
+              <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4 sm:gap-0">
+                <div className="p-3.5 rounded-2xl bg-mist border border-charcoal/5 group-hover:scale-110 group-hover:rotate-3 transition-transform shadow-inner shrink-0">
                   {stat.icon}
                 </div>
-                <div className="text-right">
+                <div className="sm:text-right">
                   <span className="font-display font-bold text-5xl text-charcoal group-hover:text-saffron transition-colors block leading-none">
                     <CountUp end={stat.value} />
                   </span>

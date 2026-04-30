@@ -3,21 +3,18 @@ import { useForm } from '@inertiajs/react';
 import { X, Upload, Image as ImageIcon } from 'lucide-react';
 import InputError from '@/Components/InputError';
 
-export default function RecipientForm({ recipient, schools, onClose }) {
+export default function RecipientForm({ recipient, schools, colleges, courses, onClose }) {
     const isEditing = !!recipient;
     
     const { data, setData, post, put, processing, errors, clearErrors } = useForm({
         name: recipient?.name || '',
-        year: recipient?.year || new Date().getFullYear(),
-        district: recipient?.district || 'ernakulam',
-        school_id: recipient?.school_id || '',
-        status: recipient?.status || 'active',
-        course: recipient?.course || '',
-        course_type: recipient?.course_type || '3year',
-        college: recipient?.college || '',
-        academic_score: recipient?.academic_score || '',
-        need_score: recipient?.need_score || '',
-        bio: recipient?.bio || '',
+        start_year: recipient?.start_year || new Date().getFullYear(),
+        ref_school_id: recipient?.ref_school_id || '',
+        ref_college_id: recipient?.ref_college_id || '',
+        ref_course_id: recipient?.ref_course_id || '',
+        duration: recipient?.duration || '',
+        remarks: recipient?.remarks || '',
+        active: recipient?.active ?? true,
         photo: null,
     });
 
@@ -35,7 +32,6 @@ export default function RecipientForm({ recipient, schools, onClose }) {
         e.preventDefault();
         
         if (isEditing) {
-            // Inertia doesn't support PUT with files easily, use POST with _method=PUT
             post(route('admin.recipients.update', recipient.id), {
                 _method: 'PUT',
                 preserveScroll: true,
@@ -68,7 +64,7 @@ export default function RecipientForm({ recipient, schools, onClose }) {
                         
                         {/* Personal Info */}
                         <div>
-                            <h3 className="font-sans font-bold text-sm text-saffron uppercase tracking-wider mb-4 border-b border-black/5 pb-2">Personal Information</h3>
+                            <h3 className="font-sans font-bold text-sm text-saffron uppercase tracking-wider mb-4 border-b border-black/5 pb-2">Basic Information</h3>
                             
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="col-span-2">
@@ -78,39 +74,18 @@ export default function RecipientForm({ recipient, schools, onClose }) {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">Year of Selection *</label>
-                                    <input type="number" min="1999" max={new Date().getFullYear()} value={data.year} onChange={e => setData('year', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron" required />
-                                    <InputError message={errors.year} className="mt-1" />
+                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">Batch (Start Year) *</label>
+                                    <input type="number" min="1999" max={new Date().getFullYear()} value={data.start_year} onChange={e => setData('start_year', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron" required />
+                                    <InputError message={errors.start_year} className="mt-1" />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">Status *</label>
-                                    <select value={data.status} onChange={e => setData('status', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron" required>
-                                        <option value="active">Active</option>
-                                        <option value="completed">Completed</option>
-                                        <option value="withdrawn">Withdrawn</option>
+                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">Active Status</label>
+                                    <select value={data.active ? '1' : '0'} onChange={e => setData('active', e.target.value === '1')} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
                                     </select>
-                                    <InputError message={errors.status} className="mt-1" />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">District *</label>
-                                    <select value={data.district} onChange={e => setData('district', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron" required>
-                                        <option value="ernakulam">Ernakulam</option>
-                                        <option value="idukki">Idukki</option>
-                                    </select>
-                                    <InputError message={errors.district} className="mt-1" />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">School *</label>
-                                    <select value={data.school_id} onChange={e => setData('school_id', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron" required>
-                                        <option value="">Select School</option>
-                                        {schools.filter(s => s.district === data.district).map(s => (
-                                            <option key={s.id} value={s.id}>{s.name}</option>
-                                        ))}
-                                    </select>
-                                    <InputError message={errors.school_id} className="mt-1" />
+                                    <InputError message={errors.active} className="mt-1" />
                                 </div>
                             </div>
                         </div>
@@ -137,63 +112,58 @@ export default function RecipientForm({ recipient, schools, onClose }) {
                             </div>
                         </div>
 
-                        {/* Academic Info */}
+                        {/* Institutions */}
                         <div>
-                            <h3 className="font-sans font-bold text-sm text-saffron uppercase tracking-wider mb-4 border-b border-black/5 pb-2">Academic Information</h3>
+                            <h3 className="font-sans font-bold text-sm text-saffron uppercase tracking-wider mb-4 border-b border-black/5 pb-2">Institution Details</h3>
                             
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="col-span-2">
-                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">Course Name *</label>
-                                    <input type="text" placeholder="e.g. B.Sc Computer Science" value={data.course} onChange={e => setData('course', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron" required />
-                                    <InputError message={errors.course} className="mt-1" />
-                                </div>
-
-                                <div className="col-span-2">
-                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">College/Institution *</label>
-                                    <input type="text" value={data.college} onChange={e => setData('college', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron" required />
-                                    <InputError message={errors.college} className="mt-1" />
-                                </div>
-
-                                <div className="col-span-2">
-                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">Course Type *</label>
-                                    <select value={data.course_type} onChange={e => setData('course_type', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron" required>
-                                        <option value="3year">3-Year Course</option>
-                                        <option value="4year">4-Year Professional Course</option>
+                            <div className="grid grid-cols-1 gap-4">
+                                <div>
+                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">School (Original)</label>
+                                    <select value={data.ref_school_id} onChange={e => setData('ref_school_id', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron">
+                                        <option value="">Select School</option>
+                                        {schools.map(s => (
+                                            <option key={s.id} value={s.id}>{s.name}</option>
+                                        ))}
                                     </select>
-                                    <InputError message={errors.course_type} className="mt-1" />
+                                    <InputError message={errors.ref_school_id} className="mt-1" />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">Academic Score (out of 50)</label>
-                                    <input type="number" step="0.1" min="0" max="50" value={data.academic_score} onChange={e => setData('academic_score', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron" />
-                                    <InputError message={errors.academic_score} className="mt-1" />
+                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">College</label>
+                                    <select value={data.ref_college_id} onChange={e => setData('ref_college_id', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron">
+                                        <option value="">Select College</option>
+                                        {colleges.map(c => (
+                                            <option key={c.id} value={c.id}>{c.name}</option>
+                                        ))}
+                                    </select>
+                                    <InputError message={errors.ref_college_id} className="mt-1" />
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">Need Score (out of 50)</label>
-                                    <input type="number" step="0.1" min="0" max="50" value={data.need_score} onChange={e => setData('need_score', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron" />
-                                    <InputError message={errors.need_score} className="mt-1" />
+                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">Course</label>
+                                    <select value={data.ref_course_id} onChange={e => setData('ref_course_id', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron">
+                                        <option value="">Select Course</option>
+                                        {courses.map(c => (
+                                            <option key={c.id} value={c.id}>{c.name}</option>
+                                        ))}
+                                    </select>
+                                    <InputError message={errors.ref_course_id} className="mt-1" />
                                 </div>
 
-                                <div className="col-span-2 bg-adminBg p-3 rounded-md flex justify-between items-center border border-black/5">
-                                    <span className="font-sans font-bold text-sm text-charcoal/70">Total Selection Score:</span>
-                                    <span className="font-stats font-bold text-2xl text-forest">
-                                        {((parseFloat(data.academic_score) || 0) + (parseFloat(data.need_score) || 0)).toFixed(1)} <span className="text-sm text-charcoal/40">/ 100</span>
-                                    </span>
+                                <div>
+                                    <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">Course Duration (Years)</label>
+                                    <input type="number" step="0.5" value={data.duration} onChange={e => setData('duration', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron" />
+                                    <InputError message={errors.duration} className="mt-1" />
                                 </div>
                             </div>
                         </div>
 
-                        {/* Bio */}
+                        {/* Remarks */}
                         <div>
-                            <h3 className="font-sans font-bold text-sm text-saffron uppercase tracking-wider mb-4 border-b border-black/5 pb-2">Biography</h3>
+                            <h3 className="font-sans font-bold text-sm text-saffron uppercase tracking-wider mb-4 border-b border-black/5 pb-2">Remarks</h3>
                             <div>
-                                <label className="block text-sm font-bold text-charcoal/80 mb-1 font-sans">Short Bio (Optional)</label>
-                                <textarea rows="4" value={data.bio} onChange={e => setData('bio', e.target.value)} maxLength="300" className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron resize-none"></textarea>
-                                <div className="flex justify-between mt-1">
-                                    <InputError message={errors.bio} />
-                                    <span className="text-xs text-charcoal/40 font-sans ml-auto">{data.bio?.length || 0}/300</span>
-                                </div>
+                                <textarea rows="3" value={data.remarks} onChange={e => setData('remarks', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron resize-none" placeholder="Add any special notes..."></textarea>
+                                <InputError message={errors.remarks} className="mt-1" />
                             </div>
                         </div>
                     </form>

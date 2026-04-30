@@ -3,15 +3,16 @@ import { Head, useForm, Link } from '@inertiajs/react';
 import PublicLayout from '@/Components/Layout/PublicLayout';
 
 import { Search, ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Index({ recipients, years, schools, colleges, courses, filters }) {
     const { data, setData, get, processing } = useForm({
-        search: filters.search || '',
-        year: filters.year || '',
-        school: filters.school || '',
-        college: filters.college || '',
-        course: filters.course || '',
-        duration: filters.duration || '',
+        search: filters?.search || '',
+        year: filters?.year || '',
+        school: filters?.school || '',
+        college: filters?.college || '',
+        course: filters?.course || '',
+        duration: filters?.duration || '',
     });
 
     const [expandedRow, setExpandedRow] = useState(null);
@@ -66,7 +67,7 @@ export default function Index({ recipients, years, schools, colleges, courses, f
                                 className="w-full border-mist bg-white rounded text-sm focus:ring-saffron focus:border-saffron font-body text-charcoal"
                             >
                                 <option value="">All Years</option>
-                                {years.map(year => (
+                                {years?.map(year => (
                                     <option key={year} value={year}>{year}</option>
                                 ))}
                             </select>
@@ -94,7 +95,7 @@ export default function Index({ recipients, years, schools, colleges, courses, f
                                 className="w-full border-mist bg-white rounded text-sm focus:ring-saffron focus:border-saffron font-body text-charcoal"
                             >
                                 <option value="">All Courses</option>
-                                {courses.map(course => (
+                                {courses?.map(course => (
                                     <option key={course.id} value={course.id}>{course.name}</option>
                                 ))}
                             </select>
@@ -109,7 +110,7 @@ export default function Index({ recipients, years, schools, colleges, courses, f
                                 className="w-full border-mist bg-white rounded text-sm focus:ring-saffron focus:border-saffron font-body text-charcoal"
                             >
                                 <option value="">All Schools</option>
-                                {schools.map(school => (
+                                {schools?.map(school => (
                                     <option key={school.id} value={school.id}>{school.name}</option>
                                 ))}
                             </select>
@@ -124,7 +125,7 @@ export default function Index({ recipients, years, schools, colleges, courses, f
                                 className="w-full border-mist bg-white rounded text-sm focus:ring-saffron focus:border-saffron font-body text-charcoal"
                             >
                                 <option value="">All Colleges</option>
-                                {colleges.map(college => (
+                                {colleges?.map(college => (
                                     <option key={college.id} value={college.id}>{college.name}</option>
                                 ))}
                             </select>
@@ -169,109 +170,116 @@ export default function Index({ recipients, years, schools, colleges, courses, f
                         </div>
                     )}
 
-                    {recipients.data.length > 0 ? (
+                    {recipients?.data?.length > 0 ? (
                         <>
-                            <div className={`bg-white rounded shadow-sm border border-mist overflow-hidden transition-opacity duration-300 ${processing ? 'opacity-40' : 'opacity-100'}`}>
-                            <div className="overflow-x-auto">
+                            {/* Mobile Card Layout */}
+                            <div className="grid grid-cols-1 gap-6 md:hidden">
+                                {recipients?.data?.map((recipient) => (
+                                    <div key={recipient.id} className="bg-white rounded-2xl shadow-sm border border-mist overflow-hidden relative">
+                                        <div className="p-6">
+                                            <div className="flex items-start justify-between mb-4">
+                                                <div className="flex items-center gap-3">
+                                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold font-display shrink-0 border ${recipient.active ? 'bg-saffron/10 text-saffron border-saffron/20' : 'bg-charcoal/5 text-charcoal/30 border-charcoal/10'}`}>
+                                                        {recipient.name.charAt(0)}
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-bold text-lg text-forest leading-tight">{recipient.name}</h4>
+                                                        <div className="text-xs text-saffron font-bold uppercase tracking-wider mt-1">Batch {recipient.start_year || '-'}</div>
+                                                    </div>
+                                                </div>
+                                                <div className={`w-2 h-2 rounded-full ${recipient.active ? 'bg-green-500 animate-pulse' : 'bg-charcoal/20'}`}></div>
+                                            </div>
+
+                                            <div className="space-y-4 font-sans text-sm">
+                                                <div>
+                                                    <div className="text-charcoal/40 font-bold uppercase text-[10px] tracking-widest mb-1">Education</div>
+                                                    <div className="text-charcoal leading-relaxed">
+                                                        <div className="font-medium">{recipient.ref_school?.name || '-'} (School)</div>
+                                                        <div className="mt-1">{recipient.ref_college?.name || '-'} (College)</div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="text-charcoal/40 font-bold uppercase text-[10px] tracking-widest mb-1">Course</div>
+                                                    <div className="text-charcoal font-medium">
+                                                        {recipient.ref_course?.name || '-'}
+                                                        <span className="ml-2 text-charcoal/40 font-normal">({recipient.duration || '-'}Y)</span>
+                                                    </div>
+                                                </div>
+
+                                                {(recipient.remarks || recipient.inactive_reason) && (
+                                                    <div className="mt-4 pt-4 border-t border-mist/50">
+                                                        <div className="text-xs italic text-charcoal/60 leading-relaxed">
+                                                            {recipient.remarks && <p>"{recipient.remarks}"</p>}
+                                                            {recipient.inactive_reason && <p className="text-red-800/40 mt-1">Note: {recipient.inactive_reason}</p>}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Desktop Table Layout */}
+                            <div className="hidden md:block bg-white rounded-3xl shadow-sm border border-mist overflow-hidden">
                                 <table className="w-full text-left font-body">
-                                    <thead className="bg-mist text-charcoal/80 font-sans text-sm uppercase tracking-wider border-b border-mist/80">
+                                    <thead className="bg-mist/50 text-charcoal font-sans text-xs uppercase tracking-[0.2em] border-b border-mist">
                                         <tr>
-                                            <th className="px-6 py-4 font-bold">Scholar Name</th>
-                                            <th className="px-6 py-4 font-bold">School / College</th>
-                                            <th className="px-6 py-4 font-bold">Course / Duration</th>
-                                            <th className="px-6 py-4 font-bold">Status</th>
-                                            <th className="px-6 py-4 font-bold">Details</th>
+                                            <th className="px-8 py-5 font-black">Scholar</th>
+                                            <th className="px-8 py-5 font-black">Institution</th>
+                                            <th className="px-8 py-5 font-black">Program</th>
+                                            <th className="px-8 py-5 font-black text-center">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-mist">
-                                        {recipients.data.map((recipient) => (
-                                            <React.Fragment key={recipient.id}>
-                                                <tr className={`hover:bg-cream transition-colors ${!recipient.active ? 'bg-mist/30' : ''}`}>
-                                                    <td className="px-6 py-4">
-                                                        <div className="flex items-center gap-4">
-                                                            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold font-display shrink-0 overflow-hidden border ${recipient.active ? 'bg-saffron/10 text-saffron border-saffron/20' : 'bg-charcoal/10 text-charcoal/50 border-charcoal/20'}`}>
-                                                                {recipient.name.charAt(0)}
-                                                            </div>
-                                                            <div>
-                                                                <span className={`font-bold text-lg ${recipient.active ? 'text-forest' : 'text-charcoal/60'}`}>{recipient.name}</span>
-                                                                <div className="text-sm text-saffron font-bold">Batch: {recipient.start_year || '-'}</div>
-                                                            </div>
+                                        {recipients?.data?.map((recipient) => (
+                                            <tr key={recipient.id} className="hover:bg-cream/30 transition-colors group">
+                                                <td className="px-8 py-6">
+                                                    <div className="flex items-center gap-4">
+                                                        <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold font-display shrink-0 border ${recipient.active ? 'bg-saffron/10 text-saffron border-saffron/20' : 'bg-charcoal/5 text-charcoal/30 border-charcoal/10'}`}>
+                                                            {recipient.name.charAt(0)}
                                                         </div>
-                                                    </td>
-                                                    <td className="px-6 py-4">
-                                                        <div className="text-charcoal font-medium text-sm">
-                                                            <span className="font-bold text-charcoal/50 mr-1">S:</span> 
-                                                            {recipient.ref_school?.name || '-'}
+                                                        <div>
+                                                            <div className="font-bold text-forest group-hover:text-saffron transition-colors">{recipient.name}</div>
+                                                            <div className="text-[10px] text-charcoal/40 font-bold uppercase tracking-widest mt-1">Batch {recipient.start_year || '-'}</div>
                                                         </div>
-                                                        <div className="text-sm text-charcoal mt-1">
-                                                            <span className="font-bold text-charcoal/50 mr-1">C:</span> 
-                                                            {recipient.ref_college?.name || '-'}
-                                                        </div>
-                                                    </td>
-                                                    <td className="px-6 py-4">
-                                                        <div className="text-charcoal font-medium">{recipient.ref_course?.name || '-'}</div>
-                                                        <div className="text-sm text-charcoal/60 mt-0.5">{recipient.duration ? `${recipient.duration} Years` : '-'}</div>
-                                                    </td>
-                                                    <td className="px-6 py-4">
+                                                    </div>
+                                                </td>
+                                                <td className="px-8 py-6">
+                                                    <div className="text-sm text-charcoal leading-relaxed max-w-xs">
+                                                        <div className="truncate font-medium" title={recipient.ref_school?.name}>{recipient.ref_school?.name || '-'}</div>
+                                                        <div className="truncate text-charcoal/50 text-xs mt-1" title={recipient.ref_college?.name}>{recipient.ref_college?.name || '-'}</div>
+                                                    </div>
+                                                </td>
+                                                <td className="px-8 py-6">
+                                                    <div className="text-sm font-medium text-charcoal">{recipient.ref_course?.name || '-'}</div>
+                                                    <div className="text-xs text-charcoal/40 mt-1">{recipient.duration ? `${recipient.duration} Years` : '-'}</div>
+                                                </td>
+                                                <td className="px-8 py-6 text-center">
+                                                    <div className="flex justify-center">
                                                         {recipient.active ? (
-                                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                            <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-green-700 text-[10px] font-black uppercase tracking-widest">
+                                                                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
                                                                 Active
                                                             </span>
                                                         ) : (
-                                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                                                Inactive
+                                                            <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-charcoal/5 text-charcoal/40 text-[10px] font-black uppercase tracking-widest">
+                                                                Completed
                                                             </span>
                                                         )}
-                                                    </td>
-                                                    <td className="px-6 py-4">
-                                                        {(recipient.remarks || recipient.inactive_reason) ? (
-                                                            <button 
-                                                                onClick={() => setExpandedRow(expandedRow === recipient.id ? null : recipient.id)}
-                                                                className="text-saffron hover:text-forest transition-colors p-1"
-                                                            >
-                                                                {expandedRow === recipient.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                                                            </button>
-                                                        ) : (
-                                                            <span className="text-charcoal/30">-</span>
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                                {/* Expanded Details Row */}
-                                                {expandedRow === recipient.id && (recipient.remarks || recipient.inactive_reason) && (
-                                                    <tr className="bg-saffron/5">
-                                                        <td colSpan="5" className="px-6 py-4 border-b border-saffron/10">
-                                                            <div className="flex gap-2 items-start">
-                                                                <AlertCircle className="text-saffron shrink-0 mt-0.5" size={18} />
-                                                                <div className="text-sm">
-                                                                    {recipient.remarks && (
-                                                                        <div className="mb-2">
-                                                                            <span className="font-bold text-charcoal">Remarks: </span>
-                                                                            <span className="text-charcoal/80">{recipient.remarks}</span>
-                                                                        </div>
-                                                                    )}
-                                                                    {recipient.inactive_reason && (
-                                                                        <div>
-                                                                            <span className="font-bold text-red-800">Inactive Reason: </span>
-                                                                            <span className="text-red-800/80">{recipient.inactive_reason}</span>
-                                                                        </div>
-                                                                    )}
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                )}
-                                            </React.Fragment>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         ))}
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
 
                         {/* Pagination */}
                         {recipients.links.length > 3 && (
                             <div className="mt-16 flex justify-center">
                                 <div className="flex flex-wrap gap-1">
-                                    {recipients.links.map((link, k) => {
+                                    {recipients?.links?.map((link, k) => {
                                         return (
                                             <Link
                                                 key={k}
@@ -290,18 +298,21 @@ export default function Index({ recipients, years, schools, colleges, courses, f
                         )}
                     </>
                 ) : (
-                    <div className="text-center py-24 bg-mist rounded border border-charcoal/5">
-                        <div className="text-4xl mb-4">🔍</div>
-                        <h3 className="font-display font-bold text-2xl text-charcoal mb-2">No recipients found</h3>
-                        <p className="font-body text-charcoal/70">
-                            We couldn't find any scholars matching your current filters.
+                    <div className="text-center py-32 bg-white rounded-[3rem] border border-mist shadow-sm max-w-2xl mx-auto px-10">
+                        <div className="w-24 h-24 bg-mist rounded-full flex items-center justify-center mx-auto mb-8 text-saffron/30">
+                            <Search size={48} />
+                        </div>
+                        <h3 className="font-display font-bold text-3xl text-forest mb-4">No Scholars Found</h3>
+                        <p className="font-body text-lg text-charcoal/50 leading-relaxed">
+                            We couldn't find any scholarship recipients matching your current selection. Try adjusting your filters or searching for a different batch.
                         </p>
                         {hasFilters && (
                             <button 
                                 onClick={clearFilters}
-                                className="mt-6 text-saffron font-bold text-sm uppercase tracking-wider hover:underline"
+                                className="mt-10 inline-flex items-center gap-2 bg-saffron text-white px-8 py-3 rounded-full font-sans font-bold text-sm uppercase tracking-widest hover:bg-forest transition-all hover:shadow-lg"
                             >
-                                Clear All Filters
+                                <AlertCircle size={18} />
+                                Reset All Filters
                             </button>
                         )}
                     </div>

@@ -14,10 +14,13 @@ use App\Http\Controllers\Public\DonorController;
 use App\Http\Controllers\Public\GalleryController;
 use App\Http\Controllers\Public\NewsController;
 use App\Http\Controllers\Public\DonateController;
+use App\Http\Controllers\Public\ScholarshipApplicationController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/scholarships', [ScholarshipController::class, 'index'])->name('scholarships');
+Route::get('/scholarship-application', [ScholarshipApplicationController::class, 'create'])->name('scholarship.apply');
+Route::post('/scholarship-application', [ScholarshipApplicationController::class, 'store'])->name('scholarship.store');
 Route::get('/recipients', [RecipientController::class, 'index'])->name('recipients');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 Route::get('/news', [NewsController::class, 'index'])->name('news');

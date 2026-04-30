@@ -67,9 +67,9 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="mb-8"
+                    className="mb-6 md:mb-8 mt-12 md:mt-0"
                 >
-                    <span className="font-sans text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-saffron bg-saffron/10 border border-saffron/30 px-6 py-2.5 rounded-full backdrop-blur-md">
+                    <span className="font-sans text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em] sm:tracking-[0.3em] text-saffron bg-saffron/10 border border-saffron/30 px-4 sm:px-6 py-2 rounded-full backdrop-blur-md inline-block">
                         Empowering Futures Since {settings.trust_established || '1999'}
                     </span>
                 </motion.div>
@@ -78,7 +78,7 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-display text-5xl md:text-7xl lg:text-8xl text-white font-bold leading-tight mb-8"
+                    className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-white font-bold leading-tight mb-6 md:mb-8 px-2"
                 >
                     Turning <span className="text-saffron italic">Potential</span> <br />
                     Into <span className="text-glow">Possibility</span>
@@ -88,7 +88,7 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}
-                    className="font-body text-lg md:text-2xl text-cream/80 mb-12 max-w-3xl mx-auto leading-relaxed"
+                    className="font-body text-base md:text-xl lg:text-2xl text-cream/80 mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed px-4"
                 >
                     {settings.hero_subtext || "Empowering bright, financially disadvantaged students in Kerala to achieve university education through merit-cum-means scholarships."}
                 </motion.p>
@@ -100,25 +100,14 @@ export default function HeroSection() {
                     className="flex flex-col sm:flex-row gap-6 justify-center items-center"
                 >
                     <Link
-                        href={route('donate')}
-                        className="group relative px-10 py-5 bg-saffron text-white rounded-sm font-sans font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(232,135,42,0.4)]"
-                    >
-                        <span className="relative z-10 flex items-center gap-2">
-                            <Heart size={20} className="transition-transform group-hover:scale-110" />
-                            {settings.hero_cta_secondary || "Support a Student"}
-                        </span>
-                        <div className="absolute inset-0 bg-rust translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
-                    </Link>
-
-                    <Link
                         href={route('scholarships')}
-                        className="group relative px-10 py-5 border border-white/30 text-white rounded-sm font-sans font-bold text-lg overflow-hidden transition-all duration-300 hover:border-saffron backdrop-blur-sm"
+                        className="group relative px-10 py-5 bg-saffron text-white rounded-sm font-sans font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(232,135,42,0.4)]"
                     >
                         <span className="relative z-10 flex items-center gap-2">
                             <GraduationCap size={22} className="transition-transform group-hover:rotate-12" />
                             {settings.hero_cta_primary || "Explore Scholarships"}
                         </span>
-                        <div className="absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        <div className="absolute inset-0 bg-rust translate-y-full transition-transform duration-300 group-hover:translate-y-0" />
                     </Link>
                 </motion.div>
             </motion.div>

@@ -107,10 +107,14 @@ export default function DataTable({
                                                     ? 'z-10 bg-saffron text-white border-saffron' 
                                                     : 'bg-white border-inputBorder text-charcoal hover:bg-adminBg/50'
                                             } ${(isPrevious && !link.active) ? 'rounded-l-md px-2' : ''} ${(isNext && !link.active) ? 'rounded-r-md px-2' : ''}`}
-                                            dangerouslySetInnerHTML={isPrevious || isNext ? undefined : { __html: link.label }}
                                         >
-                                            {isPrevious && <ChevronLeft size={16} />}
-                                            {isNext && <ChevronRight size={16} />}
+                                            {isPrevious ? (
+                                                <ChevronLeft size={16} />
+                                            ) : isNext ? (
+                                                <ChevronRight size={16} />
+                                            ) : (
+                                                <span dangerouslySetInnerHTML={{ __html: link.label }} />
+                                            )}
                                         </Link>
                                     );
                                 })}

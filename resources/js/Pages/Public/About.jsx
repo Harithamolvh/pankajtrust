@@ -26,18 +26,18 @@ export default function About() {
                         <div className="prose prose-lg prose-headings:font-display prose-headings:text-forest prose-p:font-body prose-p:text-charcoal/80 prose-a:text-saffron max-w-none">
                             <h2 className="text-3xl font-bold mb-6">Our Founding Story</h2>
                             <p>
-                                The Dr. Pankaj Educational and Charitable Trust was established in <strong>{settings.trust_established}</strong> under the Charitable Trust Act of Kerala. It was formally inaugurated in <strong>{settings.trust_inaugurated}</strong>.
+                                The Dr. Pankaj Educational and Charitable Trust was established in <strong>{settings.trust_established || 'April 1999'}</strong> under the Charitable Trust Act of Kerala. It was formally inaugurated in <strong>{settings.trust_inaugurated || 'August 1999 at Maharaja\'s College, Ernakulam'}</strong>.
                             </p>
                             <p>
-                                The Trust was born from the personal journey of its founder, {settings.founder_name}. Having grown up experiencing the challenges of poverty in Maradu village, he carried a lifelong vision: to ensure that financial hardship would not be a barrier to higher education for bright, talented students.
+                                The Trust was born from the personal journey of its founder, {settings.founder_name || 'Dr. Thampil Pankaj'}. Having grown up experiencing the challenges of poverty in Maradu village, he carried a lifelong vision: to ensure that financial hardship would not be a barrier to higher education for bright, talented students.
                             </p>
                             
                             <h3 className="text-2xl font-bold mt-12 mb-4">The Scholarship Fund</h3>
                             <p>
-                                The initial corpus fund of ₹15 lakhs, provided entirely by the founder from his personal savings in 1999, has since expanded to <strong>{settings.corpus_amount}</strong>. 
+                                The initial corpus fund of ₹15 lakhs, provided entirely by the founder from his personal savings in 1999, has since expanded to <strong>{settings.corpus_amount || '₹32 lakhs'}</strong>. 
                             </p>
                             <p>
-                                Currently, the Trust provides annual scholarships totaling <strong>{settings.annual_expenditure}</strong>. Approximately 70% of this amount is generated from the interest earned on the endowment corpus, while the remaining 30% is generously contributed by family members and close friends who have joined the cause since 2008.
+                                Currently, the Trust provides annual scholarships totaling <strong>{settings.annual_expenditure || '₹4 lakhs+'}</strong>. Approximately 70% of this amount is generated from the interest earned on the endowment corpus, while the remaining 30% is generously contributed by family members and close friends who have joined the cause since 2008.
                             </p>
 
                             <h3 className="text-2xl font-bold mt-12 mb-4">Our Mission</h3>
@@ -52,12 +52,6 @@ export default function About() {
                                 <li><strong>Registration:</strong> Charitable Trust Act of Kerala</li>
                                 <li><strong>Tax Exemption:</strong> Donations are eligible under Section 80G of the Income Tax Act, 1961.</li>
                             </ul>
-                            <div className="mt-6">
-                                <a href="#" className="inline-flex items-center font-sans font-bold text-saffron hover:text-forest transition-colors">
-                                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                    Download Trust Registration Document (PDF)
-                                </a>
-                            </div>
                         </div>
                     </div>
 
@@ -66,7 +60,7 @@ export default function About() {
                         <div className="bg-cream rounded-sm shadow-xl border-t-4 border-gold sticky top-28">
                             <div className="bg-forest pt-12 pb-6 px-6 text-center relative overflow-hidden">
                                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
-                                <div className="w-48 h-auto mx-auto relative z-10 mb-4">
+                                <div className="w-72 h-auto mx-auto relative z-10 mb-4">
                                     <svg viewBox="0 0 400 500" className="w-full h-auto drop-shadow-xl">
                                         <defs>
                                             <clipPath id="about-founder-clip">

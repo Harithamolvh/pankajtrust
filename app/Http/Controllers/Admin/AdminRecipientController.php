@@ -17,7 +17,7 @@ class AdminRecipientController extends Controller
 {
     public function index(Request $request)
     {
-        $query = StdRecipient::with('refSchool:id,name')->latest();
+        $query = StdRecipient::with(['refSchool', 'refCollege', 'refCourse'])->latest();
 
         // Search
         if ($request->filled('search')) {
@@ -27,30 +27,28 @@ class AdminRecipientController extends Controller
 
         // Filters
         if ($request->filled('year')) {
-            $query->where('year', $request->year);
-        }
-        if ($request->filled('district')) {
-            $query->where('district', $request->district);
+            $query->where('start_year', $request->year);
         }
         if ($request->filled('school_id')) {
             $query->where('ref_school_id', $request->school_id);
         }
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-        if ($request->filled('course_type')) {
-            $query->where('course_type', $request->course_type);
+        if ($request->filled('active')) {
+            $query->where('active', $request->active === 'yes');
         }
 
         $recipients = $query->paginate(20)->withQueryString();
         
         $schools = RefSchool::select('id', 'name')->get();
+        $colleges = \App\Models\RefCollege::select('id', 'name')->get();
+        $courses = \App\Models\RefCourse::select('id', 'name')->get();
         $years = StdRecipient::select('start_year as year')->distinct()->whereNotNull('start_year')->orderBy('start_year', 'desc')->pluck('year');
 
         return Inertia::render('Admin/Recipients/Index', [
             'recipients' => $recipients,
-            'filters' => $request->only(['search', 'year', 'district', 'school_id', 'status', 'course_type']),
+            'filters' => $request->only(['search', 'year', 'school_id', 'active']),
             'schools' => $schools,
+            'colleges' => $colleges,
+            'courses' => $courses,
             'years' => $years
         ]);
     }
@@ -79,8 +77,7 @@ class AdminRecipientController extends Controller
 
     public function updateStatus(Request $request, StdRecipient $recipient)
     {
-        $request->validate(['status' => 'required|in:active,completed,withdrawn']);
-        $recipient->update(['status' => $request->status]);
+        $recipient->update(['active' => !$recipient->active]);
         return redirect()->back()->with('success', 'Status updated successfully.');
     }
 

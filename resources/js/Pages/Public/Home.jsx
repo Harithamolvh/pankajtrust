@@ -76,7 +76,7 @@ export default function Home({ recentPosts, stats }) {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
                         {/* Chapter 1: 1950s */}
                         <ScrollReveal delay={0.1} direction="up">
-                            <div className="group relative h-full bg-white rounded-[2.5rem] p-10 md:p-12 border border-charcoal/5 shadow-[0_15px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_30px_70px_rgba(232,135,42,0.15)] transition-all duration-700 hover:-translate-y-4 overflow-hidden">
+                            <div className="group relative h-full bg-white rounded-[2.5rem] p-8 md:p-12 border border-charcoal/5 shadow-[0_15px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_30px_70px_rgba(232,135,42,0.15)] transition-all duration-700 hover:-translate-y-4 overflow-hidden">
                                 <div className="absolute -right-6 -top-6 font-display text-[12rem] font-black text-charcoal/[0.02] group-hover:text-saffron/[0.05] group-hover:scale-110 transition-all duration-1000 pointer-events-none select-none leading-none">
                                     50
                                 </div>
@@ -135,7 +135,7 @@ export default function Home({ recentPosts, stats }) {
             </section>
 
             {/* Mission Callout — Cinematic Parallax */}
-            <section className="relative h-[60vh] md:h-[80vh] flex items-center justify-center overflow-hidden bg-charcoal">
+            <section className="relative min-h-[60vh] md:h-[80vh] py-20 md:py-0 flex items-center justify-center overflow-hidden bg-charcoal">
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-black/70 z-10" />
                     <img
@@ -150,7 +150,7 @@ export default function Home({ recentPosts, stats }) {
                         <div className="flex justify-center mb-10">
                             <Quote size={60} className="text-saffron/40 rotate-180" />
                         </div>
-                        <p className="font-display italic text-3xl md:text-5xl text-white leading-tight mb-12">
+                        <p className="font-display italic text-2xl md:text-5xl text-white leading-tight mb-12 px-4">
                             "There are too many bright talented young children who are unable to receive higher education because of their family's poor financial background. With some financial assistance, they can do better in life and serve society much better."
                         </p>
                         <div className="flex flex-col items-center">
@@ -177,7 +177,7 @@ export default function Home({ recentPosts, stats }) {
                         </div>
                     </ScrollReveal>
 
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto md:h-[750px]">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto md:min-h-[750px]">
                         {/* Step 1: Nomination - Large Vertical Feature */}
                         <div className="md:col-span-5 h-full">
                             <ScrollReveal delay={0.1} direction="left" className="h-full">
@@ -272,7 +272,7 @@ export default function Home({ recentPosts, stats }) {
                             <ScrollReveal direction="left">
                                 <div className="relative overflow-hidden w-full max-w-[400px] mx-auto">
                                     {/* SVG Decor Frame */}
-                                    <svg viewBox="0 0 400 500" className="w-full h-auto drop-shadow-2xl">
+                                    <svg viewBox="0 0 400 500" className="w-full h-auto drop-shadow-2xl relative z-10">
                                         <defs>
                                             <clipPath id="founder-clip">
                                                 <ellipse cx="200" cy="230" rx="165" ry="200" />
@@ -281,17 +281,21 @@ export default function Home({ recentPosts, stats }) {
                                         <ellipse cx="200" cy="230" rx="175" ry="210" fill="none" stroke="#E8872A" strokeWidth="3" opacity="0.6" />
                                         <ellipse cx="200" cy="230" rx="185" ry="220" fill="none" stroke="#C9A84C" strokeWidth="1" opacity="0.3" />
                                         <image href="/images/dr-pankaj.jpg" x="35" y="30" width="330" height="400" clipPath="url(#founder-clip)" preserveAspectRatio="xMidYMid slice" onError={(e) => { e.target.href.baseVal = "https://images.unsplash.com/photo-1507676184212-d0c30a47bfb0?auto=format&fit=crop&q=80&w=800"; }} />
+                                        
+                                        {/* Curtain wipe — Now inside SVG for perfect clipping */}
+                                        <motion.rect
+                                            x="35" y="30" width="330" height="400"
+                                            fill="#E8872A"
+                                            clipPath="url(#founder-clip)"
+                                            initial={{ scaleX: 1 }}
+                                            whileInView={{ scaleX: 0 }}
+                                            viewport={{ once: true, margin: '-100px' }}
+                                            transition={{ duration: 1.2, delay: 0.2, ease: [0.76, 0, 0.24, 1] }}
+                                            style={{ transformOrigin: 'left' }}
+                                        />
+                                        
                                         <ellipse cx="200" cy="440" rx="130" ry="20" fill="#E8872A" opacity="0.15" />
                                     </svg>
-
-                                    {/* Curtain wipe — animates width 100%→0% when in view */}
-                                    <motion.div
-                                        className="absolute inset-0 bg-saffron origin-right z-10"
-                                        initial={{ scaleX: 1 }}
-                                        whileInView={{ scaleX: 0 }}
-                                        viewport={{ once: true, margin: '-100px' }}
-                                        transition={{ duration: 1.2, delay: 0.2, ease: [0.76, 0, 0.24, 1] }}
-                                    />
                                 </div>
                             </ScrollReveal>
                         </div>
@@ -307,7 +311,7 @@ export default function Home({ recentPosts, stats }) {
 
                                 <Link
                                     href={route('about')}
-                                    className="inline-block border border-saffron/50 text-saffron px-8 py-4 rounded-sm font-sans font-semibold text-sm hover:bg-saffron hover:text-white transition-colors uppercase tracking-wider"
+                                    className="inline-block border border-saffron/50 text-saffron px-6 sm:px-8 py-3 sm:py-4 rounded-sm font-sans font-semibold text-xs sm:text-sm hover:bg-saffron hover:text-white transition-colors uppercase tracking-wider"
                                 >
                                     Read Full Story
                                 </Link>

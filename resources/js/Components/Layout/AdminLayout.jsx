@@ -74,7 +74,7 @@ export default function AdminLayout({ title, children, breadcrumbs = [] }) {
                     <NavSection title="Scholarship">
                         <NavItem href={route('admin.recipients.index')} icon={Users} label="Recipients" active={route().current('admin.recipients.*')} />
                         <NavItem href={route('admin.schools.index')} icon={School} label="Schools" active={route().current('admin.schools.*')} />
-                        <NavItem href={route('admin.donors.index')} icon={Award} label="Donors" active={route().current('admin.donors.*')} />
+                        <NavItem href={route('admin.applications.index')} icon={Mail} label="Applications" active={route().current('admin.applications.*')} />
                     </NavSection>
 
                     <NavSection title="Content">

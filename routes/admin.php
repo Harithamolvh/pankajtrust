@@ -11,8 +11,12 @@ use App\Http\Controllers\Admin\AdminNewsController;
 use App\Http\Controllers\Admin\AdminMessageController;
 use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminScholarshipApplicationController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+// Applications
+Route::resource('applications', AdminScholarshipApplicationController::class)->only(['index', 'show', 'destroy']);
 
 // Messages
 Route::resource('messages', AdminMessageController::class)->only(['index', 'show', 'destroy']);
@@ -37,7 +41,7 @@ Route::patch('schools/{school}/toggle', [AdminSchoolController::class, 'toggle']
 Route::resource('schools', AdminSchoolController::class);
 
 // Donors
-Route::post('donors/reorder', [AdminDonorController::class, 'reorder'])->name('donors.reorder');
-Route::resource('donors', AdminDonorController::class);
+// Route::post('donors/reorder', [AdminDonorController::class, 'reorder'])->name('donors.reorder');
+// Route::resource('donors', AdminDonorController::class);
 
 

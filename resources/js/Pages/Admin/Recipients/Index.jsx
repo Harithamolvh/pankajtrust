@@ -7,7 +7,7 @@ import { Plus, Download, Edit2, Trash2 } from 'lucide-react';
 import RecipientForm from './RecipientForm';
 import Modal from '@/Components/Modal';
 
-export default function RecipientsIndex({ recipients, filters, schools, years }) {
+export default function RecipientsIndex({ recipients, filters, schools, colleges, courses, years }) {
     const [searchQuery, setSearchQuery] = useState(filters.search || '');
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [editingRecipient, setEditingRecipient] = useState(null);
@@ -27,10 +27,7 @@ export default function RecipientsIndex({ recipients, filters, schools, years })
     };
 
     const toggleStatus = (recipient) => {
-        const statuses = ['active', 'completed', 'withdrawn'];
-        const nextStatus = statuses[(statuses.indexOf(recipient.status) + 1) % statuses.length];
-        
-        router.patch(route('admin.recipients.status', recipient.id), { status: nextStatus }, { preserveScroll: true });
+        router.patch(route('admin.recipients.status', recipient.id), {}, { preserveScroll: true });
     };
 
     const openForm = (recipient = null) => {
@@ -55,24 +52,19 @@ export default function RecipientsIndex({ recipients, filters, schools, years })
                     </div>
                     <div>
                         <div className="font-bold">{row.name}</div>
-                        <div className="text-xs text-charcoal/50">{row.district}</div>
                     </div>
                 </div>
             )
         },
-        { header: 'Year', cell: (row) => row.year },
-        { header: 'School', cell: (row) => row.school?.name || '-' },
-        { header: 'Course', cell: (row) => (
-            <div>
-                <div>{row.course}</div>
-                <div className="text-xs text-charcoal/50">{row.course_type}</div>
-            </div>
-        )},
+        { header: 'Batch', cell: (row) => row.start_year },
+        { header: 'School', cell: (row) => row.ref_school?.name || '-' },
+        { header: 'College', cell: (row) => row.ref_college?.name || '-' },
+        { header: 'Course', cell: (row) => row.ref_course?.name || '-' },
         { 
             header: 'Status', 
             cell: (row) => (
                 <button onClick={() => toggleStatus(row)} className="hover:opacity-80 transition-opacity focus:outline-none">
-                    <Badge status={row.status}>{row.status}</Badge>
+                    <Badge status={row.active ? 'active' : 'withdrawn'}>{row.active ? 'Active' : 'Inactive'}</Badge>
                 </button>
             )
         },
@@ -98,27 +90,18 @@ export default function RecipientsIndex({ recipients, filters, schools, years })
             <div className="mb-6 flex flex-wrap gap-4 items-end justify-between bg-white p-4 rounded-lg shadow-sm border border-black/5">
                 <div className="flex flex-wrap gap-4 flex-1">
                     <div>
-                        <label className="block text-xs font-bold text-charcoal/60 uppercase tracking-wider mb-1 font-sans">Year</label>
+                        <label className="block text-xs font-bold text-charcoal/60 uppercase tracking-wider mb-1 font-sans">Batch Year</label>
                         <select className="border-inputBorder rounded-md text-sm font-sans focus:ring-saffron focus:border-saffron bg-white" value={filters.year || ''} onChange={e => handleFilterChange('year', e.target.value)}>
                             <option value="">All Years</option>
                             {years.map(y => <option key={y} value={y}>{y}</option>)}
                         </select>
                     </div>
                     <div>
-                        <label className="block text-xs font-bold text-charcoal/60 uppercase tracking-wider mb-1 font-sans">District</label>
-                        <select className="border-inputBorder rounded-md text-sm font-sans focus:ring-saffron focus:border-saffron bg-white" value={filters.district || ''} onChange={e => handleFilterChange('district', e.target.value)}>
-                            <option value="">All Districts</option>
-                            <option value="ernakulam">Ernakulam</option>
-                            <option value="idukki">Idukki</option>
-                        </select>
-                    </div>
-                    <div>
                         <label className="block text-xs font-bold text-charcoal/60 uppercase tracking-wider mb-1 font-sans">Status</label>
-                        <select className="border-inputBorder rounded-md text-sm font-sans focus:ring-saffron focus:border-saffron bg-white" value={filters.status || ''} onChange={e => handleFilterChange('status', e.target.value)}>
+                        <select className="border-inputBorder rounded-md text-sm font-sans focus:ring-saffron focus:border-saffron bg-white" value={filters.active || ''} onChange={e => handleFilterChange('active', e.target.value)}>
                             <option value="">All Statuses</option>
-                            <option value="active">Active</option>
-                            <option value="completed">Completed</option>
-                            <option value="withdrawn">Withdrawn</option>
+                            <option value="yes">Active</option>
+                            <option value="no">Inactive</option>
                         </select>
                     </div>
                     <div className="flex items-end">
@@ -147,6 +130,8 @@ export default function RecipientsIndex({ recipients, filters, schools, years })
                 <RecipientForm 
                     recipient={editingRecipient} 
                     schools={schools}
+                    colleges={colleges}
+                    courses={courses}
                     onClose={() => setIsFormOpen(false)} 
                 />
             )}
