@@ -84,7 +84,7 @@ export default function Home({ recentPosts, stats }) {
                                     <div className="w-20 h-20 rounded-2xl bg-saffron/10 flex items-center justify-center text-saffron mb-10 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-sm border border-saffron/5">
                                         <span className="font-display font-bold text-2xl">1950s</span>
                                     </div>
-                                    <h3 className="font-display font-bold text-3xl text-charcoal mb-6 group-hover:translate-x-2 transition-transform duration-500">Early Life & Struggle</h3>
+                                    <h3 className="font-display font-bold text-3xl text-charcoal mb-6 group-hover:translate-x-2 transition-transform duration-500">Early Life</h3>
                                     <p className="font-body text-charcoal/60 leading-relaxed text-lg group-hover:text-charcoal/80 transition-colors">
                                         Born in Maradu village, Dr. Pankaj's personal experience with poverty fueled a lifelong mission: ensuring financial hardship never blocks the path to higher education.
                                     </p>
@@ -194,7 +194,7 @@ export default function Home({ recentPosts, stats }) {
                                     <div className="mt-12 aspect-[4/3] rounded-[2rem] overflow-hidden bg-mist relative">
                                         <div className="absolute inset-0 bg-saffron/10 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
                                         <img 
-                                            src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800" 
+                                            src="/images/site/nomination.png" 
                                             alt="School Nomination"
                                             className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-100"
                                         />
@@ -221,9 +221,9 @@ export default function Home({ recentPosts, stats }) {
                                         <div className="md:w-2/5 h-full rounded-[2rem] overflow-hidden shadow-2xl relative">
                                             <div className="absolute inset-0 bg-gold/10 mix-blend-overlay" />
                                             <img 
-                                                src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=600" 
+                                                src="/images/site/verification.png" 
                                                 alt="Verification"
-                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110"
                                             />
                                         </div>
                                     </div>
@@ -246,7 +246,7 @@ export default function Home({ recentPosts, stats }) {
                                     <div className="md:w-2/5 h-full rounded-[2rem] overflow-hidden order-1 md:order-2 bg-mist relative">
                                         <div className="absolute inset-0 bg-sage/10 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
                                         <img 
-                                            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=600" 
+                                            src="/images/site/support.png" 
                                             alt="Support"
                                             className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:rotate-2 group-hover:scale-110"
                                         />

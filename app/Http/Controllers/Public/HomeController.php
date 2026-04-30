@@ -23,8 +23,17 @@ class HomeController extends Controller
             'recentPosts' => NewsPost::published()
                 ->latest('published_at')
                 ->take(3)
-                ->get(['id', 'title', 'slug', 'excerpt', 'cover_image', 'published_at']),
-            'gallery' => Media::where('collection_name', 'meeting_gallery')->latest()->take(8)->get(),
+                ->get(['id', 'title', 'slug', 'excerpt', 'cover_image', 'published_at'])
+                ->map(fn($p) => $p->append('cover_url')),
+            'gallery' => \App\Models\GalleryImage::where('active', true)
+                ->orderBy('sort_order')
+                ->take(8)
+                ->get()
+                ->map(fn($img) => [
+                    'id' => $img->id,
+                    'url' => $img->url,
+                    'title' => $img->title,
+                ]),
             'stats' => [
                 'students' => StdRecipient::count(),
                 'schools' => RefSchool::count(),

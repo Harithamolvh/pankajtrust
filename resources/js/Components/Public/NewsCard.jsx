@@ -11,9 +11,9 @@ export default function NewsCard({ post }) {
         >
             <div className="h-64 w-full relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent z-10" />
-                {post.cover_image ? (
+                {post.cover_url || post.cover_image ? (
                     <img 
-                        src={post.cover_image} 
+                        src={post.cover_url || post.cover_image} 
                         alt={post.title} 
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />

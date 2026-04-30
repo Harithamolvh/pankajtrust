@@ -158,9 +158,20 @@ export default function Index({ recipients, years, schools, colleges, courses, f
                 </div>
 
                 {/* Grid */}
-                {recipients.data.length > 0 ? (
-                    <>
-                        <div className="bg-white rounded shadow-sm border border-mist overflow-hidden">
+                <div className="relative">
+                    {/* Loader Overlay */}
+                    {processing && (
+                        <div className="absolute inset-0 z-50 bg-white/60 backdrop-blur-[2px] flex items-center justify-center rounded-lg">
+                            <div className="flex flex-col items-center gap-4">
+                                <div className="w-12 h-12 border-4 border-saffron/20 border-t-saffron rounded-full animate-spin"></div>
+                                <span className="font-sans font-bold text-saffron uppercase tracking-widest text-xs">Updating Scholars...</span>
+                            </div>
+                        </div>
+                    )}
+
+                    {recipients.data.length > 0 ? (
+                        <>
+                            <div className={`bg-white rounded shadow-sm border border-mist overflow-hidden transition-opacity duration-300 ${processing ? 'opacity-40' : 'opacity-100'}`}>
                             <div className="overflow-x-auto">
                                 <table className="w-full text-left font-body">
                                     <thead className="bg-mist text-charcoal/80 font-sans text-sm uppercase tracking-wider border-b border-mist/80">
@@ -295,6 +306,7 @@ export default function Index({ recipients, years, schools, colleges, courses, f
                         )}
                     </div>
                 )}
+                </div>
             </div>
         </PublicLayout>
     );

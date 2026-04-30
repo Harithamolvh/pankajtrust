@@ -17,13 +17,12 @@ class GalleryController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $images = $mediaRecords->map(function ($media) {
+        $meetingImages = $mediaRecords->map(function ($media) {
             $meeting = $media->model;
             
             $customTitle = $media->getCustomProperty('title');
             $customDesc = $media->getCustomProperty('description');
             
-            // Build caption using description and district
             $captionParts = [];
             if ($customDesc) $captionParts[] = $customDesc;
             if ($meeting && $meeting->district) $captionParts[] = 'District: ' . $meeting->district;
@@ -37,6 +36,22 @@ class GalleryController extends Controller
                 'caption' => implode(' | ', $captionParts),
             ];
         });
+
+        $galleryImages = \App\Models\GalleryImage::where('active', true)
+            ->orderBy('sort_order')
+            ->get()
+            ->map(function ($img) {
+                return [
+                    'id' => $img->id,
+                    'url' => $img->url,
+                    'title' => $img->title,
+                    'category' => $img->category ?: 'General',
+                    'district' => null,
+                    'caption' => $img->title,
+                ];
+            });
+
+        $images = $meetingImages->concat($galleryImages);
             
         return Inertia::render('Public/Gallery', [
             'images' => $images,

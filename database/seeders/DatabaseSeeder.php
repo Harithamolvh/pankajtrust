@@ -15,12 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@pankajtrust.org',
-            'password' => bcrypt('password'),
-            'is_admin' => true,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@pankajtrust.org'],
+            [
+                'name' => 'Admin User',
+                'password' => bcrypt('password'),
+                'is_admin' => true,
+            ]
+        );
 
         $settings = [
             ['key' => 'hero_headline', 'group' => 'hero', 'label' => 'Hero Headline', 'value' => 'Turning Potential Into Possibility'],
@@ -51,25 +53,21 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($settings as $setting) {
-            \App\Models\SiteSetting::create($setting);
+            \App\Models\AppSetting::updateOrCreate(['key' => $setting['key']], $setting);
         }
 
-        $school1 = \App\Models\School::create([
+        $school1 = \App\Models\RefSchool::firstOrCreate([
             'name' => 'Govt. Higher Secondary School, Maradu',
-            'district' => 'ernakulam',
-            'type' => 'government',
+        ], [
             'active' => true,
         ]);
 
-        \App\Models\Recipient::create([
+        \App\Models\StdRecipient::firstOrCreate([
             'name' => 'Adithya K',
-            'year' => 2024,
-            'school_id' => $school1->id,
-            'district' => 'ernakulam',
-            'course' => 'B.Sc Computer Science',
-            'course_type' => '3year',
-            'college' => 'Sacred Heart College',
-            'status' => 'active',
+            'start_year' => 2024,
+            'ref_school_id' => $school1->id,
+        ], [
+            'active' => true,
         ]);
     }
 }

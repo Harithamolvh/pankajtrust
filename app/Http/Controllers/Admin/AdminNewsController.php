@@ -21,7 +21,7 @@ class AdminNewsController extends Controller
             $query->where('title', 'like', "%{$request->search}%");
         }
 
-        $posts = $query->paginate(20)->withQueryString();
+        $posts = $query->paginate(20)->through(fn($post) => $post->append('cover_url'))->withQueryString();
 
         return Inertia::render('Admin/News/Index', [
             'posts' => $posts,
@@ -40,7 +40,7 @@ class AdminNewsController extends Controller
         $data['slug'] = Str::slug($data['title']);
         $data['author_id'] = auth()->id();
         
-        $post = NewsPost::create($data);
+        $post = NewsPost::create(array_diff_key($data, ['cover_image' => '']));
 
         if ($request->hasFile('cover_image')) {
             $post->addMediaFromRequest('cover_image')->toMediaCollection('cover');
@@ -52,7 +52,7 @@ class AdminNewsController extends Controller
     public function edit(NewsPost $news)
     {
         return Inertia::render('Admin/News/Edit', [
-            'post' => $news,
+            'post' => $news->append('cover_url'),
         ]);
     }
 
@@ -61,7 +61,7 @@ class AdminNewsController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::slug($data['title']);
         
-        $news->update($data);
+        $news->update(array_diff_key($data, ['cover_image' => '']));
 
         if ($request->hasFile('cover_image')) {
             $news->addMediaFromRequest('cover_image')->toMediaCollection('cover');

@@ -21,9 +21,11 @@ export default function Index({ posts }) {
                 
                 {posts.data.length > 0 ? (
                     <>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="flex flex-wrap justify-center gap-8">
                             {posts.data.map((post) => (
-                                <NewsCard key={post.id} post={post} />
+                                <div key={post.id} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] max-w-sm">
+                                    <NewsCard post={post} />
+                                </div>
                             ))}
                         </div>
 

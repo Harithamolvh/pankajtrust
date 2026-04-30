@@ -12,7 +12,8 @@ class NewsController extends Controller
     {
         $posts = NewsPost::published()
             ->latest('published_at')
-            ->paginate(12);
+            ->paginate(12)
+            ->through(fn($post) => $post->append('cover_url'));
             
         return Inertia::render('Public/News/Index', [
             'posts' => $posts,
@@ -25,13 +26,14 @@ class NewsController extends Controller
 
     public function show($slug)
     {
-        $post = NewsPost::published()->where('slug', $slug)->firstOrFail();
+        $post = NewsPost::published()->where('slug', $slug)->firstOrFail()->append('cover_url');
         
         $relatedPosts = NewsPost::published()
             ->where('id', '!=', $post->id)
             ->latest('published_at')
             ->take(3)
-            ->get();
+            ->get()
+            ->map(fn($p) => $p->append('cover_url'));
             
         return Inertia::render('Public/News/Show', [
             'post' => $post,

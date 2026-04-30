@@ -291,10 +291,10 @@ export default function NewsForm({ post, isEditing }) {
                         <h3 className="font-sans font-bold text-lg text-charcoal mb-4">Cover Image</h3>
                         
                         <div>
-                            {coverPreview || postData.cover_image ? (
+                            {coverPreview || postData.cover_url ? (
                                 <div className="mb-4 relative rounded-md overflow-hidden border border-black/5">
                                     <img 
-                                        src={coverPreview || `/storage/${postData.cover_image}`} 
+                                        src={coverPreview || postData.cover_url} 
                                         alt="Cover Preview" 
                                         className="w-full aspect-video object-cover" 
                                     />

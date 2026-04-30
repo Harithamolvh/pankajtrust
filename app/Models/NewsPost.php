@@ -11,10 +11,20 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 class NewsPost extends Model implements HasMedia
 {
     use InteractsWithMedia, HasUuids;
+    
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('cover')->singleFile();
+    }
 
     protected $fillable = [
         'title', 'slug', 'excerpt', 'body', 'cover_image', 'author_id', 'published_at', 'meta_title', 'meta_description'
     ];
+
+    public function getCoverUrlAttribute()
+    {
+        return $this->getFirstMediaUrl('cover');
+    }
 
     protected $casts = [
         'published_at' => 'datetime',
