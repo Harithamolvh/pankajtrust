@@ -3,32 +3,33 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use App\Models\GalleryImage;
+use App\Models\Meeting;
 use App\Models\NewsPost;
-use App\Models\Recipient;
-use App\Models\School;
+use App\Models\StdRecipient;
+use App\Models\RefSchool;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class HomeController extends Controller
 {
     public function index()
     {
         return Inertia::render('Public/Home', [
-            'recentRecipients' => Recipient::with('school')
-                ->latest('year')
+            'recentRecipients' => StdRecipient::with('refSchool')
+                ->latest('start_year')
                 ->take(3)
-                ->get(['id', 'name', 'year', 'course', 'college', 'photo', 'school_id']),
+                ->get(),
             'recentPosts' => NewsPost::published()
                 ->latest('published_at')
                 ->take(3)
                 ->get(['id', 'title', 'slug', 'excerpt', 'cover_image', 'published_at']),
-            'gallery' => GalleryImage::where('active', true)->orderBy('sort_order')->take(8)->get(),
+            'gallery' => Media::where('collection_name', 'meeting_gallery')->latest()->take(8)->get(),
             'stats' => [
-                'students' => Recipient::count(),
-                'schools' => School::where('active', true)->count(),
+                'students' => StdRecipient::count(),
+                'schools' => RefSchool::count(),
                 'years' => now()->year - 1999,
-                'active' => Recipient::where('status', 'active')->count(),
+                'active' => StdRecipient::where('active', true)->count(),
             ],
             'meta' => [
                 'title' => 'Dr. Pankaj Educational and Charitable Trust',

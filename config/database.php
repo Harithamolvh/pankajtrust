@@ -64,6 +64,21 @@ return [
             ]) : [],
         ],
 
+        'mysql_old' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_OLD', '127.0.0.1'),
+            'port' => env('DB_PORT_OLD', '3306'),
+            'database' => env('DB_DATABASE_OLD', 'pankajtrust_old'),
+            'username' => env('DB_USERNAME_OLD', 'root'),
+            'password' => env('DB_PASSWORD_OLD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => false,
+            'engine' => null,
+        ],
+
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),

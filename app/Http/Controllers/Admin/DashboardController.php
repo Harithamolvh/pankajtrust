@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Recipient;
-use App\Models\School;
+use App\Models\StdRecipient;
+use App\Models\RefSchool;
 use App\Models\ContactMessage;
 use Inertia\Inertia;
 
@@ -14,20 +14,22 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalRecipients = Recipient::count();
-        $activeScholars = Recipient::where('status', 'active')->count();
-        $partnerSchools = School::where('active', true)->count();
+        $totalRecipients = StdRecipient::count();
+        $activeScholars = StdRecipient::where('active', true)->count();
+        $partnerSchools = RefSchool::count();
         $unreadMessages = ContactMessage::whereNull('read_at')->count();
 
-        $recipientsByYear = Recipient::selectRaw('year, count(*) as total')
-            ->groupBy('year')
-            ->orderBy('year')
+        $recipientsByYear = StdRecipient::selectRaw('start_year as year, count(*) as total')
+            ->whereNotNull('start_year')
+            ->groupBy('start_year')
+            ->orderBy('start_year')
             ->get()
             ->map(fn($item) => ['year' => (string)$item->year, 'total' => $item->total]);
 
-        $statusBreakdown = Recipient::selectRaw('status, count(*) as total')
-            ->groupBy('status')
-            ->get();
+        $statusBreakdown = StdRecipient::selectRaw('active, count(*) as total')
+            ->groupBy('active')
+            ->get()
+            ->map(fn($item) => ['status' => $item->active ? 'active' : 'inactive', 'total' => $item->total]);
 
         $recentMessages = ContactMessage::latest()
             ->take(5)
@@ -42,10 +44,19 @@ class DashboardController extends Controller
                 ];
             });
 
-        $recentRecipients = Recipient::with('school:id,name')
+        $recentRecipients = StdRecipient::with('refSchool:id,name')
             ->latest()
             ->take(5)
-            ->get(['id', 'name', 'year', 'school_id', 'status']);
+            ->get(['id', 'name', 'start_year', 'ref_school_id', 'active'])
+            ->map(function ($r) {
+                return [
+                    'id' => $r->id,
+                    'name' => $r->name,
+                    'year' => $r->start_year,
+                    'school' => $r->refSchool,
+                    'status' => $r->active ? 'active' : 'inactive'
+                ];
+            });
 
         return Inertia::render('Admin/Dashboard', [
             'stats' => [

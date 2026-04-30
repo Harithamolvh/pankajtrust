@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\School;
+use App\Models\RefSchool;
 use Inertia\Inertia;
 use App\Http\Requests\Admin\StoreSchoolRequest;
 use App\Http\Requests\Admin\UpdateSchoolRequest;
@@ -14,7 +14,7 @@ class AdminSchoolController extends Controller
 {
     public function index(Request $request)
     {
-        $query = School::withCount('recipients')->latest();
+        $query = RefSchool::latest();
 
         if ($request->filled('search')) {
             $query->where('name', 'like', "%{$request->search}%");
@@ -39,27 +39,24 @@ class AdminSchoolController extends Controller
 
     public function store(StoreSchoolRequest $request)
     {
-        School::create($request->validated());
+        RefSchool::create($request->validated());
         return redirect()->back()->with('success', 'School created successfully.');
     }
 
-    public function update(UpdateSchoolRequest $request, School $school)
+    public function update(UpdateSchoolRequest $request, RefSchool $school)
     {
         $school->update($request->validated());
         return redirect()->back()->with('success', 'School updated successfully.');
     }
 
-    public function toggle(Request $request, School $school)
+    public function toggle(Request $request, RefSchool $school)
     {
         $school->update(['active' => !$school->active]);
         return redirect()->back()->with('success', 'School status updated successfully.');
     }
 
-    public function destroy(School $school)
+    public function destroy(RefSchool $school)
     {
-        if ($school->recipients()->exists()) {
-            return redirect()->back()->with('error', 'Cannot delete school because it has recipients linked to it.');
-        }
         
         $school->delete();
         return redirect()->back()->with('success', 'School deleted successfully.');

@@ -78,7 +78,7 @@ export default function AdminLayout({ title, children, breadcrumbs = [] }) {
                     </NavSection>
 
                     <NavSection title="Content">
-                        <NavItem href={route('admin.gallery.index')} icon={Images} label="Gallery" active={route().current('admin.gallery.*')} />
+
                         <NavItem href={route('admin.news.index')} icon={Newspaper} label="News & Updates" active={route().current('admin.news.*')} />
                         <NavItem href={route('admin.messages.index')} icon={Mail} label="Messages" active={route().current('admin.messages.*')} badge={unreadMessagesCount} />
                     </NavSection>

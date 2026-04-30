@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Recipient;
+use App\Models\StdRecipient;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -24,26 +24,20 @@ class RecipientsExport implements FromQuery, WithHeadings, WithMapping
 
     public function query()
     {
-        $query = Recipient::with('school');
+        $query = StdRecipient::with(['refSchool', 'refCollege', 'refCourse']);
 
         if (!empty($this->filters['search'])) {
             $search = $this->filters['search'];
             $query->where('name', 'like', "%{$search}%");
         }
         if (!empty($this->filters['year'])) {
-            $query->where('year', $this->filters['year']);
-        }
-        if (!empty($this->filters['district'])) {
-            $query->where('district', $this->filters['district']);
+            $query->where('start_year', $this->filters['year']);
         }
         if (!empty($this->filters['school_id'])) {
-            $query->where('school_id', $this->filters['school_id']);
+            $query->where('ref_school_id', $this->filters['school_id']);
         }
-        if (!empty($this->filters['status'])) {
-            $query->where('status', $this->filters['status']);
-        }
-        if (!empty($this->filters['course_type'])) {
-            $query->where('course_type', $this->filters['course_type']);
+        if (isset($this->filters['status']) && $this->filters['status'] !== '') {
+            $query->where('active', $this->filters['status'] === 'active');
         }
 
         return $query;
@@ -54,15 +48,15 @@ class RecipientsExport implements FromQuery, WithHeadings, WithMapping
         return [
             'ID',
             'Name',
-            'Year',
+            'Start Year',
             'School',
-            'District',
-            'Course',
-            'Course Type',
             'College',
-            'Academic Score',
-            'Need Score',
+            'Course',
+            'Duration',
             'Status',
+            'Remarks',
+            'Inactive Reason',
+            'Inactive From',
             'Created At',
         ];
     }
@@ -72,15 +66,15 @@ class RecipientsExport implements FromQuery, WithHeadings, WithMapping
         return [
             $recipient->id,
             $recipient->name,
-            $recipient->year,
-            $recipient->school ? $recipient->school->name : '',
-            ucfirst($recipient->district),
-            $recipient->course,
-            $recipient->course_type,
-            $recipient->college,
-            $recipient->academic_score,
-            $recipient->need_score,
-            ucfirst($recipient->status),
+            $recipient->start_year,
+            $recipient->refSchool ? $recipient->refSchool->name : '',
+            $recipient->refCollege ? $recipient->refCollege->name : '',
+            $recipient->refCourse ? $recipient->refCourse->name : '',
+            $recipient->duration,
+            $recipient->active ? 'Active' : 'Inactive',
+            $recipient->remarks,
+            $recipient->inactive_reason,
+            $recipient->inactive_from ? $recipient->inactive_from->format('Y-m-d') : '',
             $recipient->created_at->format('Y-m-d H:i:s'),
         ];
     }

@@ -7,13 +7,24 @@ import { X, ZoomIn } from 'lucide-react';
 export default function Gallery({ images }) {
     const [selectedImage, setSelectedImage] = useState(null);
 
-    // Group images by category
-    const categories = ['All', ...new Set(images.map(img => img.category).filter(Boolean))];
-    const [activeCategory, setActiveCategory] = useState('All');
+    // Group images by category (Year)
+    const availableYears = [...new Set(images.map(img => img.category).filter(Boolean))].sort().reverse();
+    const categories = ['All', ...availableYears];
+    
+    // Default to the latest year if available, else 'All'
+    const defaultCategory = availableYears.length > 0 ? availableYears[0] : 'All';
+    const [activeCategory, setActiveCategory] = useState(defaultCategory);
 
-    const filteredImages = activeCategory === 'All' 
-        ? images 
-        : images.filter(img => img.category === activeCategory);
+    // Group by District
+    const availableDistricts = [...new Set(images.map(img => img.district).filter(Boolean))].sort();
+    const districts = ['All', ...availableDistricts];
+    const [activeDistrict, setActiveDistrict] = useState('All');
+
+    const filteredImages = images.filter(img => {
+        const matchCategory = activeCategory === 'All' || img.category === activeCategory;
+        const matchDistrict = activeDistrict === 'All' || img.district === activeDistrict;
+        return matchCategory && matchDistrict;
+    });
 
     return (
         <PublicLayout title="Photo Gallery">
@@ -32,20 +43,42 @@ export default function Gallery({ images }) {
                 
                 {/* Filters */}
                 {categories.length > 1 && (
-                    <div className="flex flex-wrap justify-center gap-2 mb-12">
-                        {categories.map(category => (
-                            <button
-                                key={category}
-                                onClick={() => setActiveCategory(category)}
-                                className={`px-6 py-2 rounded-full font-sans font-bold text-sm transition-all ${
-                                    activeCategory === category 
-                                        ? 'bg-saffron text-white shadow-md' 
-                                        : 'bg-cream border border-mist text-charcoal hover:border-saffron hover:text-saffron'
-                                }`}
-                            >
-                                {category}
-                            </button>
-                        ))}
+                    <div className="flex flex-col items-center gap-4 mb-12">
+                        {/* Year Filter */}
+                        <div className="flex flex-wrap justify-center gap-2">
+                            {categories.map(category => (
+                                <button
+                                    key={category}
+                                    onClick={() => setActiveCategory(category)}
+                                    className={`px-6 py-2 rounded-full font-sans font-bold text-sm transition-all ${
+                                        activeCategory === category 
+                                            ? 'bg-saffron text-white shadow-md' 
+                                            : 'bg-cream border border-mist text-charcoal hover:border-saffron hover:text-saffron'
+                                    }`}
+                                >
+                                    {category}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* District Filter */}
+                        {districts.length > 1 && (
+                            <div className="flex flex-wrap justify-center gap-2">
+                                {districts.map(district => (
+                                    <button
+                                        key={district}
+                                        onClick={() => setActiveDistrict(district)}
+                                        className={`px-5 py-1.5 rounded-full font-sans font-semibold text-xs transition-all ${
+                                            activeDistrict === district 
+                                                ? 'bg-forest text-white shadow-sm' 
+                                                : 'bg-cream/50 border border-mist/50 text-charcoal/70 hover:border-forest hover:text-forest'
+                                        }`}
+                                    >
+                                        {district}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 )}
 

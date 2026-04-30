@@ -1,27 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Head, useForm, Link } from '@inertiajs/react';
 import PublicLayout from '@/Components/Layout/PublicLayout';
 
-import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
 
-export default function Index({ recipients, years, filters }) {
+export default function Index({ recipients, years, schools, colleges, courses, filters }) {
     const { data, setData, get, processing } = useForm({
         search: filters.search || '',
         year: filters.year || '',
+        school: filters.school || '',
+        college: filters.college || '',
+        course: filters.course || '',
+        duration: filters.duration || '',
     });
 
+    const [expandedRow, setExpandedRow] = useState(null);
+
     const handleSearch = (e) => {
-        e.preventDefault();
+        if (e) e.preventDefault();
         get(route('recipients'), { preserveState: true });
     };
 
     const handleFilterChange = (key, value) => {
         setData(key, value);
-        // Delay form submission slightly to let state update
         setTimeout(() => {
             get(route('recipients'), { preserveState: true, data: { ...data, [key]: value } });
         }, 10);
     };
+
+    const clearFilters = () => {
+        setData({ search: '', year: '', school: '', college: '', course: '', duration: '' });
+        setTimeout(() => {
+            get(route('recipients'));
+        }, 10);
+    };
+
+    const hasFilters = data.search || data.year || data.school || data.college || data.course || data.duration;
 
     return (
         <PublicLayout title="Our Scholars">
@@ -39,48 +53,108 @@ export default function Index({ recipients, years, filters }) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 
                 {/* Filters */}
-                <div className="bg-cream p-6 rounded shadow-sm border border-saffron/20 mb-12 flex flex-col md:flex-row gap-4 justify-between items-center">
-                    <div className="flex gap-2 items-center w-full md:w-auto">
-                        <span className="font-sans font-bold text-sm text-charcoal uppercase tracking-wider mr-2">Filter by Year:</span>
-                        <select 
-                            value={data.year}
-                            onChange={(e) => handleFilterChange('year', e.target.value)}
-                            className="border-mist bg-white rounded text-sm focus:ring-saffron focus:border-saffron font-body text-charcoal"
-                        >
-                            <option value="">All Years</option>
-                            {years.map(year => (
-                                <option key={year} value={year}>{year}</option>
-                            ))}
-                        </select>
-                    </div>
+                <div className="bg-cream p-6 rounded shadow-sm border border-saffron/20 mb-8">
+                    <h3 className="font-sans font-bold text-charcoal uppercase tracking-wider mb-4 border-b border-mist pb-2">Filter Recipients</h3>
+                    
+                    <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {/* Year */}
+                        <div>
+                            <label className="block text-xs font-bold text-charcoal/70 uppercase mb-1">Batch Year</label>
+                            <select 
+                                value={data.year}
+                                onChange={(e) => handleFilterChange('year', e.target.value)}
+                                className="w-full border-mist bg-white rounded text-sm focus:ring-saffron focus:border-saffron font-body text-charcoal"
+                            >
+                                <option value="">All Years</option>
+                                {years.map(year => (
+                                    <option key={year} value={year}>{year}</option>
+                                ))}
+                            </select>
+                        </div>
 
-                    <form onSubmit={handleSearch} className="w-full md:w-auto flex">
-                        <div className="relative w-full md:w-64">
+                        {/* Name */}
+                        <div>
+                            <label className="block text-xs font-bold text-charcoal/70 uppercase mb-1">Name</label>
                             <input 
                                 type="text"
-                                placeholder="Search by name, course..."
+                                placeholder="Search by name..."
                                 value={data.search}
                                 onChange={(e) => setData('search', e.target.value)}
-                                className="w-full border-mist bg-white rounded-l text-sm focus:ring-saffron focus:border-saffron font-body pl-4 pr-10"
+                                onBlur={() => handleSearch()}
+                                className="w-full border-mist bg-white rounded text-sm focus:ring-saffron focus:border-saffron font-body"
                             />
-                            {data.search && (
-                                <button 
-                                    type="button" 
-                                    onClick={() => handleFilterChange('search', '')}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 text-mist hover:text-saffron"
-                                >
-                                    &times;
-                                </button>
-                            )}
                         </div>
-                        <button 
-                            type="submit"
-                            disabled={processing}
-                            className="bg-saffron text-white px-4 py-2 rounded-r flex items-center justify-center hover:bg-forest transition-colors"
-                        >
-                            <Search size={16} />
-                        </button>
+
+                        {/* Course */}
+                        <div>
+                            <label className="block text-xs font-bold text-charcoal/70 uppercase mb-1">Degree / Course</label>
+                            <select 
+                                value={data.course}
+                                onChange={(e) => handleFilterChange('course', e.target.value)}
+                                className="w-full border-mist bg-white rounded text-sm focus:ring-saffron focus:border-saffron font-body text-charcoal"
+                            >
+                                <option value="">All Courses</option>
+                                {courses.map(course => (
+                                    <option key={course.id} value={course.id}>{course.name}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* School */}
+                        <div>
+                            <label className="block text-xs font-bold text-charcoal/70 uppercase mb-1">School</label>
+                            <select 
+                                value={data.school}
+                                onChange={(e) => handleFilterChange('school', e.target.value)}
+                                className="w-full border-mist bg-white rounded text-sm focus:ring-saffron focus:border-saffron font-body text-charcoal"
+                            >
+                                <option value="">All Schools</option>
+                                {schools.map(school => (
+                                    <option key={school.id} value={school.id}>{school.name}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* College */}
+                        <div>
+                            <label className="block text-xs font-bold text-charcoal/70 uppercase mb-1">College</label>
+                            <select 
+                                value={data.college}
+                                onChange={(e) => handleFilterChange('college', e.target.value)}
+                                className="w-full border-mist bg-white rounded text-sm focus:ring-saffron focus:border-saffron font-body text-charcoal"
+                            >
+                                <option value="">All Colleges</option>
+                                {colleges.map(college => (
+                                    <option key={college.id} value={college.id}>{college.name}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* Duration */}
+                        <div>
+                            <label className="block text-xs font-bold text-charcoal/70 uppercase mb-1">Duration (Years)</label>
+                            <input 
+                                type="number"
+                                step="0.5"
+                                placeholder="e.g. 3"
+                                value={data.duration}
+                                onChange={(e) => setData('duration', e.target.value)}
+                                onBlur={() => handleSearch()}
+                                className="w-full border-mist bg-white rounded text-sm focus:ring-saffron focus:border-saffron font-body"
+                            />
+                        </div>
                     </form>
+                    
+                    {hasFilters && (
+                        <div className="mt-4 flex justify-end">
+                            <button 
+                                onClick={clearFilters}
+                                className="text-sm font-bold text-saffron hover:text-forest transition-colors uppercase tracking-wider"
+                            >
+                                Clear All Filters
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 {/* Grid */}
@@ -92,38 +166,90 @@ export default function Index({ recipients, years, filters }) {
                                     <thead className="bg-mist text-charcoal/80 font-sans text-sm uppercase tracking-wider border-b border-mist/80">
                                         <tr>
                                             <th className="px-6 py-4 font-bold">Scholar Name</th>
-                                            <th className="px-6 py-4 font-bold">School / District</th>
-                                            <th className="px-6 py-4 font-bold">Course / College</th>
-                                            <th className="px-6 py-4 font-bold">Year</th>
+                                            <th className="px-6 py-4 font-bold">School / College</th>
+                                            <th className="px-6 py-4 font-bold">Course / Duration</th>
+                                            <th className="px-6 py-4 font-bold">Status</th>
+                                            <th className="px-6 py-4 font-bold">Details</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-mist">
                                         {recipients.data.map((recipient) => (
-                                            <tr key={recipient.id} className="hover:bg-cream transition-colors">
-                                                <td className="px-6 py-4">
-                                                    <div className="flex items-center gap-4">
-                                                        <div className="w-12 h-12 rounded-full bg-saffron/10 text-saffron flex items-center justify-center font-bold font-display shrink-0 overflow-hidden border border-saffron/20">
-                                                            {recipient.photo ? (
-                                                                <img src={recipient.photo} alt={recipient.name} className="w-full h-full object-cover" />
-                                                            ) : (
-                                                                recipient.name.charAt(0)
-                                                            )}
+                                            <React.Fragment key={recipient.id}>
+                                                <tr className={`hover:bg-cream transition-colors ${!recipient.active ? 'bg-mist/30' : ''}`}>
+                                                    <td className="px-6 py-4">
+                                                        <div className="flex items-center gap-4">
+                                                            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold font-display shrink-0 overflow-hidden border ${recipient.active ? 'bg-saffron/10 text-saffron border-saffron/20' : 'bg-charcoal/10 text-charcoal/50 border-charcoal/20'}`}>
+                                                                {recipient.name.charAt(0)}
+                                                            </div>
+                                                            <div>
+                                                                <span className={`font-bold text-lg ${recipient.active ? 'text-forest' : 'text-charcoal/60'}`}>{recipient.name}</span>
+                                                                <div className="text-sm text-saffron font-bold">Batch: {recipient.start_year || '-'}</div>
+                                                            </div>
                                                         </div>
-                                                        <span className="font-bold text-forest text-lg">{recipient.name}</span>
-                                                    </div>
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    <div className="text-charcoal font-medium">{recipient.school?.name || '-'}</div>
-                                                    <div className="text-sm text-charcoal/60 mt-0.5">{recipient.district || recipient.school?.district}</div>
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    <div className="text-charcoal font-medium">{recipient.course}</div>
-                                                    <div className="text-sm text-charcoal/60 mt-0.5">{recipient.college}</div>
-                                                </td>
-                                                <td className="px-6 py-4 font-bold text-saffron whitespace-nowrap">
-                                                    {recipient.year}
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        <div className="text-charcoal font-medium text-sm">
+                                                            <span className="font-bold text-charcoal/50 mr-1">S:</span> 
+                                                            {recipient.ref_school?.name || '-'}
+                                                        </div>
+                                                        <div className="text-sm text-charcoal mt-1">
+                                                            <span className="font-bold text-charcoal/50 mr-1">C:</span> 
+                                                            {recipient.ref_college?.name || '-'}
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        <div className="text-charcoal font-medium">{recipient.ref_course?.name || '-'}</div>
+                                                        <div className="text-sm text-charcoal/60 mt-0.5">{recipient.duration ? `${recipient.duration} Years` : '-'}</div>
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        {recipient.active ? (
+                                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                                Active
+                                                            </span>
+                                                        ) : (
+                                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                                Inactive
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        {(recipient.remarks || recipient.inactive_reason) ? (
+                                                            <button 
+                                                                onClick={() => setExpandedRow(expandedRow === recipient.id ? null : recipient.id)}
+                                                                className="text-saffron hover:text-forest transition-colors p-1"
+                                                            >
+                                                                {expandedRow === recipient.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                                                            </button>
+                                                        ) : (
+                                                            <span className="text-charcoal/30">-</span>
+                                                        )}
+                                                    </td>
+                                                </tr>
+                                                {/* Expanded Details Row */}
+                                                {expandedRow === recipient.id && (recipient.remarks || recipient.inactive_reason) && (
+                                                    <tr className="bg-saffron/5">
+                                                        <td colSpan="5" className="px-6 py-4 border-b border-saffron/10">
+                                                            <div className="flex gap-2 items-start">
+                                                                <AlertCircle className="text-saffron shrink-0 mt-0.5" size={18} />
+                                                                <div className="text-sm">
+                                                                    {recipient.remarks && (
+                                                                        <div className="mb-2">
+                                                                            <span className="font-bold text-charcoal">Remarks: </span>
+                                                                            <span className="text-charcoal/80">{recipient.remarks}</span>
+                                                                        </div>
+                                                                    )}
+                                                                    {recipient.inactive_reason && (
+                                                                        <div>
+                                                                            <span className="font-bold text-red-800">Inactive Reason: </span>
+                                                                            <span className="text-red-800/80">{recipient.inactive_reason}</span>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )}
+                                            </React.Fragment>
                                         ))}
                                     </tbody>
                                 </table>
@@ -159,12 +285,9 @@ export default function Index({ recipients, years, filters }) {
                         <p className="font-body text-charcoal/70">
                             We couldn't find any scholars matching your current filters.
                         </p>
-                        {(data.search || data.year) && (
+                        {hasFilters && (
                             <button 
-                                onClick={() => {
-                                    setData({ search: '', year: '' });
-                                    get(route('recipients'));
-                                }}
+                                onClick={clearFilters}
                                 className="mt-6 text-saffron font-bold text-sm uppercase tracking-wider hover:underline"
                             >
                                 Clear All Filters

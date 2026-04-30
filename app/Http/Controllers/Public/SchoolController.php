@@ -3,22 +3,23 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use App\Models\School;
+use App\Models\RefSchool;
 use Inertia\Inertia;
 
 class SchoolController extends Controller
 {
     public function index()
     {
-        $schools = School::withCount('recipients')
-            ->orderBy('district')
+        $schools = RefSchool::orderBy('district')
             ->orderBy('name')
             ->get();
-            
-        return Inertia::render('Public/Schools', [
-            'schools' => $schools,
+
+        $districts = $schools->groupBy('district');
+
+        return Inertia::render('Public/Schools/Index', [
+            'districts' => $districts,
             'meta' => [
-                'title' => 'Partner Schools | Dr. Pankaj Educational and Charitable Trust',
+                'title' => 'Our Partner Schools',
                 'description' => 'List of partner government and aided higher secondary schools in Ernakulam and Idukki districts.',
             ],
         ]);

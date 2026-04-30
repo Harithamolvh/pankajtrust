@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminRecipientController;
 use App\Http\Controllers\Admin\AdminSchoolController;
 use App\Http\Controllers\Admin\AdminDonorController;
-use App\Http\Controllers\Admin\AdminGalleryController;
+
 use App\Http\Controllers\Admin\AdminNewsController;
 use App\Http\Controllers\Admin\AdminMessageController;
 use App\Http\Controllers\Admin\AdminSettingsController;
@@ -40,6 +40,4 @@ Route::resource('schools', AdminSchoolController::class);
 Route::post('donors/reorder', [AdminDonorController::class, 'reorder'])->name('donors.reorder');
 Route::resource('donors', AdminDonorController::class);
 
-// Gallery
-Route::post('gallery/reorder', [AdminGalleryController::class, 'reorder'])->name('gallery.reorder');
-Route::resource('gallery', AdminGalleryController::class);
+

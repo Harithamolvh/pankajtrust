@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('donors', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name', 150);
             $table->string('relationship', 100);
-            $table->enum('contribution_type', ['capital', 'annual', 'one-time']);
+            $table->string('contribution_type');
             $table->decimal('amount', 12, 2)->nullable();
             $table->smallInteger('year')->nullable();
             $table->text('description')->nullable();

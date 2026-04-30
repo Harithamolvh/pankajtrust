@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class NewsPost extends Model implements HasMedia
 {
-    use InteractsWithMedia;
+    use InteractsWithMedia, HasUuids;
 
     protected $fillable = [
         'title', 'slug', 'excerpt', 'body', 'cover_image', 'author_id', 'published_at', 'meta_title', 'meta_description'

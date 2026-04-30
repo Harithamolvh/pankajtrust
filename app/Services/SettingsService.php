@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\SiteSetting;
+use App\Models\AppSetting;
 use Illuminate\Support\Facades\Cache;
 
 class SettingsService
@@ -14,7 +14,7 @@ class SettingsService
         return Cache::rememberForever(self::CACHE_KEY, function () {
             // we use try/catch in case the table is not migrated yet
             try {
-                return SiteSetting::pluck('value', 'key')->toArray();
+                return AppSetting::pluck('value', 'key')->toArray();
             } catch (\Exception $e) {
                 return [];
             }

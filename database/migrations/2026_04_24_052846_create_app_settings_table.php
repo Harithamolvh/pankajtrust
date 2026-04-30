@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('site_settings', function (Blueprint $table) {
+        Schema::create('app_settings', function (Blueprint $table) {
             $table->id();
             $table->string('key', 100)->unique();
             $table->text('value')->nullable();
-            $table->enum('type', ['text', 'number', 'boolean', 'json', 'html'])->default('text');
+            $table->string('type')->default('text');
             $table->string('group', 50);
             $table->string('label', 200);
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('site_settings');
+        Schema::dropIfExists('app_settings');
     }
 };
