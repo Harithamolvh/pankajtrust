@@ -25,14 +25,16 @@ class HomeController extends Controller
                 ->take(3)
                 ->get(['id', 'title', 'slug', 'excerpt', 'cover_image', 'published_at'])
                 ->map(fn($p) => $p->append('cover_url')),
-            'gallery' => \App\Models\GalleryImage::where('active', true)
-                ->orderBy('sort_order')
+            'gallery' => Media::with('model')
+                ->where('model_type', Meeting::class)
+                ->where('collection_name', 'meeting_gallery')
+                ->orderBy('created_at', 'desc')
                 ->take(8)
                 ->get()
-                ->map(fn($img) => [
-                    'id' => $img->id,
-                    'url' => $img->url,
-                    'title' => $img->title,
+                ->map(fn($media) => [
+                    'id' => $media->uuid,
+                    'url' => $media->getUrl(),
+                    'title' => $media->getCustomProperty('title') ?: ($media->model ? $media->model->name : 'Gallery Image'),
                 ]),
             'stats' => [
                 'students' => StdRecipient::count(),

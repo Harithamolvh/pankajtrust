@@ -37,21 +37,7 @@ class GalleryController extends Controller
             ];
         });
 
-        $galleryImages = \App\Models\GalleryImage::where('active', true)
-            ->orderBy('sort_order')
-            ->get()
-            ->map(function ($img) {
-                return [
-                    'id' => $img->id,
-                    'url' => $img->url,
-                    'title' => $img->title,
-                    'category' => $img->category ?: 'General',
-                    'district' => null,
-                    'caption' => $img->title,
-                ];
-            });
-
-        $images = $meetingImages->concat($galleryImages);
+        $images = $meetingImages;
             
         return Inertia::render('Public/Gallery', [
             'images' => $images,
