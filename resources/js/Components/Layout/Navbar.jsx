@@ -15,6 +15,7 @@ export default function Navbar() {
     const navLinks = [
         { name: 'Home', href: route('home') },
         { name: 'About', href: route('about') },
+        { name: 'Our Inspiration', href: route('inspiration') },
         { name: 'Scholarship', href: route('scholarships') },
         { name: 'Recipients', href: route('recipients') },
         { name: 'Gallery', href: route('gallery') },
@@ -23,10 +24,8 @@ export default function Navbar() {
     return (
         <>
             <header style={{
-                position: 'fixed', top: 0, width: '100%', zIndex: 90,
-                background: scrolled ? 'rgba(253,246,236,0.95)' : 'rgba(255,255,255,0.95)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
+                position: 'fixed', top: 0, width: '100%', zIndex: 110,
+                background: scrolled ? '#FDF6EC' : '#FFFFFF',
                 boxShadow: scrolled ? '0 1px 20px rgba(0,0,0,0.08)' : '0 1px 8px rgba(0,0,0,0.04)',
                 transition: 'all 0.35s ease',
             }}>

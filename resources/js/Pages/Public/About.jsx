@@ -43,7 +43,7 @@ export default function About() {
                             <h3 className="text-2xl font-bold mt-12 mb-4">Our Mission</h3>
                             <div className="bg-mist p-6 rounded-sm border-l-4 border-saffron my-6">
                                 <p className="font-body italic text-xl text-forest m-0 leading-relaxed">
-                                    "To provide merit-cum-means scholarships to financially poor but academically bright students, without any discrimination based on religion or caste, focusing on government and aided schools in Ernakulam and Idukki districts."
+                                    "To provide merit-cum-means scholarships to academically talented students from economically disadvantaged backgrounds, without discrimination on the basis of religion or caste, with a focused outreach to government and aided schools in Ernakulam and Idukki districts."
                                 </p>
                             </div>
 
@@ -112,7 +112,7 @@ export default function About() {
                                         <div className="flex items-center justify-center w-6 h-6 rounded-full border border-white bg-saffron text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10"></div>
                                         <div className="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] pl-4 md:pl-0 pr-0 md:group-odd:pl-4 md:group-even:pr-4">
                                             <div className="font-sans font-bold text-forest text-sm mb-1">1999–Present</div>
-                                            <div className="font-body text-sm text-charcoal/70">Retired as Principal Economist. Established Pankaj Trust. Resides in Washington DC, visiting India annually.</div>
+                                            <div className="font-body text-sm text-charcoal/70">Retired as Principal Economist. Established Pankaj Trust. Currently resides in Kerala.</div>
                                         </div>
                                     </div>
 

@@ -51,7 +51,7 @@ export default function GallerySection({ images = [] }) {
                             direction={idx % 2 === 0 ? 'up' : 'down'}
                             className={`${idx === 0 || idx === 5 ? 'md:col-span-2 md:row-span-2' : ''}`}
                         >
-                            <div className="group relative aspect-square md:aspect-auto h-full rounded-[2rem] overflow-hidden bg-forest/20 border border-white/5 transition-all duration-700 hover:border-saffron/50 shadow-2xl">
+                            <div className="group relative aspect-square rounded-[2rem] overflow-hidden bg-forest/20 border border-white/5 transition-all duration-700 hover:border-saffron/50 shadow-2xl">
                                 {/* Image Container */}
                                 <div className="absolute inset-0 z-0">
                                     <img 

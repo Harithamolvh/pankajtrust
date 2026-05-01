@@ -103,7 +103,7 @@ export default function Home({ recentPosts, stats }) {
                                     <div className="w-20 h-20 rounded-2xl bg-gold/10 flex items-center justify-center text-gold mb-10 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500 shadow-sm border border-gold/5">
                                         <span className="font-display font-bold text-2xl">1999</span>
                                     </div>
-                                    <h3 className="font-display font-bold text-3xl text-charcoal mb-6 group-hover:translate-x-2 transition-transform duration-500">Global Impact</h3>
+                                    <h3 className="font-display font-bold text-3xl text-charcoal mb-6 group-hover:translate-x-2 transition-transform duration-500">Returning to Roots</h3>
                                     <p className="font-body text-charcoal/60 leading-relaxed text-lg group-hover:text-charcoal/80 transition-colors">
                                         After a global career at the World Bank, he returned home to seed the trust with ₹15 lakhs of his own savings, creating a permanent fund for merit-cum-means scholarships.
                                     </p>
@@ -151,7 +151,7 @@ export default function Home({ recentPosts, stats }) {
                             <Quote size={60} className="text-saffron/40 rotate-180" />
                         </div>
                         <p className="font-display italic text-2xl md:text-5xl text-white leading-tight mb-12 px-4">
-                            "There are too many bright talented young children who are unable to receive higher education because of their family's poor financial background. With some financial assistance, they can do better in life and serve society much better."
+                            "There are too many bright talented young children who are unable to receive higher education. Coming from a modest financial background, with some financial assistance, they can do better in life and serve society much better."
                         </p>
                         <div className="flex flex-col items-center">
                             <div className="w-12 h-1 bg-saffron mb-6" />
@@ -240,7 +240,7 @@ export default function Home({ recentPosts, stats }) {
                                         </div>
                                         <h3 className="font-display font-bold text-3xl text-charcoal mb-6">Multi-Year Support</h3>
                                         <p className="font-body text-lg text-charcoal/60 leading-relaxed">
-                                            Assistance provided consistently for the entire 3rd or 4th-year degree course, subject to academic progress.
+                                            Assistance is provided throughout 3- or 4-year degree programs, subject to satisfactory academic progress.
                                         </p>
                                     </div>
                                     <div className="md:w-2/5 h-full rounded-[2rem] overflow-hidden order-1 md:order-2 bg-mist relative">
@@ -306,15 +306,17 @@ export default function Home({ recentPosts, stats }) {
 
                                 <div className="prose prose-lg prose-invert font-body text-cream/80 mb-10 leading-relaxed">
                                     <p>{settings.founder_short_bio}</p>
-                                    <p className="mt-4">Established in {settings.trust_established} using personal funds, the trust was born from his own childhood experience of poverty in Maradu village, ensuring others have the opportunity he fought for.</p>
+                                    <p className="mt-4">"I forged a path out of a poverty-stricken childhood in Maradu village so that the next generation wouldn’t have to walk that road alone. Our vision is to transform the barriers of poverty into gateways of opportunity, standing as a devoted champion for every brilliant child who dares to dream big."</p>
                                 </div>
 
-                                <Link
-                                    href={route('about')}
-                                    className="inline-block border border-saffron/50 text-saffron px-6 sm:px-8 py-3 sm:py-4 rounded-sm font-sans font-semibold text-xs sm:text-sm hover:bg-saffron hover:text-white transition-colors uppercase tracking-wider"
-                                >
-                                    Read Full Story
-                                </Link>
+                                <div className="text-center md:text-left">
+                                    <Link
+                                        href={route('about')}
+                                        className="inline-block border border-saffron/50 text-saffron px-6 sm:px-8 py-3 sm:py-4 rounded-sm font-sans font-semibold text-xs sm:text-sm hover:bg-saffron hover:text-white transition-colors uppercase tracking-wider"
+                                    >
+                                        Read Full Story
+                                    </Link>
+                                </div>
                             </ScrollReveal>
                         </div>
                     </div>

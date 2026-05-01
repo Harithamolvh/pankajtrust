@@ -7,6 +7,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\AboutController;
+use App\Http\Controllers\Public\InspirationController;
 use App\Http\Controllers\Public\ScholarshipController;
 use App\Http\Controllers\Public\RecipientController;
 use App\Http\Controllers\Public\SchoolController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Public\ScholarshipApplicationController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/inspiration', [InspirationController::class, 'index'])->name('inspiration');
 Route::get('/scholarships', [ScholarshipController::class, 'index'])->name('scholarships');
 Route::get('/scholarship-application', [ScholarshipApplicationController::class, 'create'])->name('scholarship.apply');
 Route::post('/scholarship-application', [ScholarshipApplicationController::class, 'store'])->name('scholarship.store');
