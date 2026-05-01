@@ -36,7 +36,7 @@ const PartnerSchoolsModal = ({ isOpen, onClose }) => {
                     >
                         <div className="p-8 border-b border-mist flex justify-between items-center bg-forest text-white">
                             <div>
-                                <h3 className="font-display font-bold text-2xl">Partner Institutions</h3>
+                                <h3 className="font-display font-bold text-2xl">Nominating Schools</h3>
                                 <p className="text-cream/70 text-sm">Empowering students from government & aided schools</p>
                             </div>
                             <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-full transition-colors">
@@ -213,7 +213,7 @@ export default function Scholarship() {
                                 onClick={() => setIsModalOpen(true)}
                                 className="font-sans font-bold text-forest hover:text-saffron transition-all flex items-center group uppercase tracking-widest text-sm"
                             >
-                                View Partner Schools 
+                                View Nominating Schools 
                                 <div className="ml-3 w-8 h-8 rounded-full bg-forest text-white flex items-center justify-center transition-all group-hover:translate-x-2 group-hover:bg-saffron">
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </div>
