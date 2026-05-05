@@ -91,7 +91,7 @@ export default function SchoolsIndex({ schools, filters }) {
     ];
 
     return (
-        <AdminLayout title="Partner Schools" breadcrumbs={[{ label: 'Dashboard', href: route('admin.dashboard') }, { label: 'Schools' }]}>
+        <AdminLayout title="Sponsor Schools" breadcrumbs={[{ label: 'Dashboard', href: route('admin.dashboard') }, { label: 'Schools' }]}>
             <Head title="Schools | Admin Panel" />
 
             <div className="mb-6 flex flex-wrap gap-4 items-end justify-between bg-white p-4 rounded-lg shadow-sm border border-black/5">

@@ -28,7 +28,7 @@ export default function Footer() {
                             <li><Link href={route('about')} className="text-mist hover:text-saffron transition-colors">About Us</Link></li>
                             <li><Link href={route('scholarships')} className="text-mist hover:text-saffron transition-colors">Scholarships</Link></li>
                             <li><Link href={route('recipients')} className="text-mist hover:text-saffron transition-colors">Scholarship List</Link></li>
-                            <li><Link href={route('schools')} className="text-mist hover:text-saffron transition-colors">Partner Schools</Link></li>
+                            <li><Link href={route('schools')} className="text-mist hover:text-saffron transition-colors">Sponsor Schools</Link></li>
                             <li><Link href={route('gallery')} className="text-mist hover:text-saffron transition-colors">Photo Gallery</Link></li>
                         </ul>
                     </div>

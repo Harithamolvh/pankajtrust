@@ -89,7 +89,7 @@ export default function Dashboard({ stats, charts, recent_activity }) {
                 {[
                     { label: 'Total Recipients', value: total_recipients, icon: Users, link: route('admin.recipients.index'), color: 'text-forest', bg: 'bg-forest/5' },
                     { label: 'Active Scholars', value: active_scholars, icon: GraduationCap, link: route('admin.recipients.index'), color: 'text-saffron', bg: 'bg-saffron/10' },
-                    { label: 'Partner Schools', value: partner_schools, icon: Building2, link: route('admin.schools.index'), color: 'text-gold', bg: 'bg-gold/10' },
+                    { label: 'Sponsor Schools', value: partner_schools, icon: Building2, link: route('admin.schools.index'), color: 'text-gold', bg: 'bg-gold/10' },
                     { label: 'Unread Messages', value: unread_messages, icon: MessageSquare, link: route('admin.messages.index'), color: 'text-rust', bg: 'bg-rust/10', alert: unread_messages > 0 }
                 ].map((stat, idx) => (
                     <motion.div key={idx} variants={itemVariants} className="md:col-span-3">

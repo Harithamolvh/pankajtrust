@@ -13,12 +13,12 @@ export default function Schools({ schools }) {
     }, {});
 
     return (
-        <PublicLayout title="Partner Schools">
+        <PublicLayout title="Sponsor Schools">
             {/* Page Header */}
             <div className="bg-forest text-cream pt-32 pb-16 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-rust/20 to-transparent"></div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-                    <h1 className="font-display font-black text-4xl md:text-5xl mb-4">Partner Schools</h1>
+                    <h1 className="font-display font-black text-4xl md:text-5xl mb-4">Sponsor Schools</h1>
                     <p className="font-body text-xl text-cream/80 max-w-2xl mx-auto">
                         We partner with government and aided higher secondary schools to identify deserving students.
                     </p>
@@ -31,7 +31,7 @@ export default function Schools({ schools }) {
                         <div key={district}>
                             <h2 className="font-display font-bold text-3xl text-forest mb-8 border-b border-mist pb-4 capitalize flex items-center gap-3">
                                 <MapPin className="text-saffron" size={28} />
-                                {district} District
+                                {district === 'Unassigned' ? 'Sponsored Schools' : `${district} District`}
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {districtSchools.map(school => (
@@ -52,9 +52,9 @@ export default function Schools({ schools }) {
                                                         </span>
                                                     )}
                                                 </div>
-                                                {school.recipients_count > 0 && (
+                                                {school.std_recipients_count > 0 && (
                                                     <p className="mt-4 font-sans text-sm font-medium text-charcoal/70">
-                                                        <strong className="text-gold">{school.recipients_count}</strong> scholar{school.recipients_count !== 1 ? 's' : ''} supported
+                                                        <strong className="text-gold">{school.std_recipients_count}</strong> scholar{school.std_recipients_count !== 1 ? 's' : ''} supported
                                                     </p>
                                                 )}
                                             </div>
@@ -71,7 +71,7 @@ export default function Schools({ schools }) {
                         <div className="text-4xl mb-4">🏫</div>
                         <h3 className="font-display font-bold text-2xl text-charcoal mb-2">No schools found</h3>
                         <p className="font-body text-charcoal/70">
-                            Partner school list is currently empty.
+                            Sponsor school list is currently empty.
                         </p>
                     </div>
                 )}

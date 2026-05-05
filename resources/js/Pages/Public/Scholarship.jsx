@@ -108,7 +108,7 @@ export default function Scholarship() {
                             </div>
                             <h3 className="font-display font-bold text-2xl text-charcoal mb-4 tracking-tight">3-Year Course</h3>
                             <div className="flex items-baseline gap-1 mb-6">
-                                <span className="font-display font-bold text-4xl md:text-5xl text-forest">{settings.scholarship_3year || '₹8,000'}</span>
+                                <span className="font-display font-bold text-4xl md:text-5xl text-forest">{settings.scholarship_3year || '₹12,000'}</span>
                                 <span className="text-charcoal/40 font-sans text-sm font-medium">/ year</span>
                             </div>
                             <p className="font-body text-charcoal/60 leading-relaxed mb-8">For standard degree programs like BA, B.Sc, B.Com across Kerala universities.</p>
@@ -125,7 +125,7 @@ export default function Scholarship() {
                             </div>
                             <h3 className="font-display font-bold text-2xl text-charcoal mb-4 tracking-tight">4-Year Course</h3>
                             <div className="flex items-baseline gap-1 mb-6">
-                                <span className="font-display font-bold text-4xl md:text-5xl text-forest">{settings.scholarship_4year || '₹10,000'}</span>
+                                <span className="font-display font-bold text-4xl md:text-5xl text-forest">{settings.scholarship_4year || '₹12,000'}</span>
                                 <span className="text-charcoal/40 font-sans text-sm font-medium">/ year</span>
                             </div>
                             <p className="font-body text-charcoal/60 leading-relaxed mb-8">For professional degrees including Engineering, Nursing, and advanced studies.</p>

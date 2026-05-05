@@ -35,7 +35,7 @@ export default function StatStrip({ stats }) {
         subtext: 'Empowering bright minds' 
     },
     { 
-        label: 'Partner Schools', 
+        label: 'Sponsor Schools', 
         value: stats.schools || stats.totalSchools || 0, 
         icon: <School className="w-6 h-6 text-gold" />, 
         subtext: 'Local impact network' 

@@ -125,7 +125,7 @@ export default function GalleryUploadModal({ onClose }) {
                                 <select value={data.category} onChange={e => setData('category', e.target.value)} className="w-full border-inputBorder rounded-md font-sans text-sm focus:ring-saffron focus:border-saffron bg-white" required>
                                     <option value="events">Events & Programs</option>
                                     <option value="students">Student Life</option>
-                                    <option value="schools">Partner Schools</option>
+                                    <option value="schools">Sponsor Schools</option>
                                     <option value="founder">Founder & Trust</option>
                                     <option value="general">General</option>
                                 </select>

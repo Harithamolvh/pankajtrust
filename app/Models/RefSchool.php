@@ -11,5 +11,8 @@ class RefSchool extends Model
 
     protected $guarded = [];
 
-    //
+    public function stdRecipients()
+    {
+        return $this->hasMany(StdRecipient::class);
+    }
 }

@@ -69,6 +69,12 @@ export default function Inspiration() {
             {/* Timeline / Story Section */}
             <section className="py-32 bg-cream overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <ScrollReveal>
+                        <div className="mb-20">
+                            <span className="font-sans font-bold text-saffron uppercase tracking-widest text-sm mb-2 block">The Story</span>
+                            <h2 className="font-display font-black text-5xl text-charcoal">Our Founder – <span className="text-forest italic">Dr. Pankaj</span></h2>
+                        </div>
+                    </ScrollReveal>
                     
                     {/* Chapter 1 */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
@@ -77,10 +83,10 @@ export default function Inspiration() {
                                 <div className="absolute -left-6 -top-6 text-[10rem] leading-none font-display font-black text-charcoal/5 pointer-events-none group-hover:text-saffron/5 transition-colors">01</div>
                                 <h3 className="font-display font-bold text-4xl text-forest mb-6 relative z-10">Humble Beginnings</h3>
                                 <p className="font-body text-lg text-charcoal/70 leading-relaxed mb-6">
-                                    Dr. Pankaj was born in Maradu village, now part of Kochi Corporation, to Shri S. Sankara Panicker and Smt. K. Kunji Amma. He pursued his early education at Mangayil High School, Maradu.
+                                    Dr. Pankaj’s journey is a powerful reminder that where you begin does not define where you can go.
                                 </p>
                                 <p className="font-body text-lg text-charcoal/70 leading-relaxed">
-                                    Driven by an insatiable thirst for knowledge despite financial hurdles, he attended Maharaja's College, Ernakulam, and the prestigious Gokhale Institute of Politics and Economics. In 1964, he earned his PhD in Economics from the University of Pune.
+                                    Born in Maradu village, he rose from modest beginnings to pursue his education at Mangayil High School, Maharaja’s College, and the Gokhale Institute of Politics and Economics, later earning his PhD in Economics from the University of Pune.
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -105,10 +111,10 @@ export default function Inspiration() {
                                 <div className="absolute -right-6 -bottom-6 text-[10rem] leading-none font-display font-black text-charcoal/5 pointer-events-none group-hover:text-gold/5 transition-colors">02</div>
                                 <h3 className="font-display font-bold text-4xl text-charcoal mb-6 relative z-10">A Global Career</h3>
                                 <p className="font-body text-lg text-charcoal/70 leading-relaxed mb-6">
-                                    He began his career with the Government of India before joining the United Nations Conference on Trade and Development in Geneva as an Economic Affairs Officer in 1972.
+                                    With determination and a strong belief in education, he built a distinguished career—serving the Government of India and contributing to global policy at the United Nations Conference on Trade and Development in Geneva.
                                 </p>
                                 <p className="font-body text-lg text-charcoal/70 leading-relaxed">
-                                    He later joined the World Bank in Washington, D.C., serving for 25 years in senior roles and retiring as Principal Economist (Infrastructure) for the South Asia Region. He contributed to the design and management of major development projects across Africa, the Middle East, and South Asia.
+                                    He dedicated 25 years to the World Bank, where he retired as Principal Economist (Infrastructure) for the South Asia Region. His work has impacted lives across Africa, the Middle East, and South Asia, especially in improving infrastructure and supporting underserved communities.
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -120,12 +126,12 @@ export default function Inspiration() {
                             <div className="bg-forest p-10 md:p-14 rounded-[3rem] shadow-2xl relative overflow-hidden group border border-white/10">
                                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay"></div>
                                 <div className="absolute -left-6 -top-6 text-[10rem] leading-none font-display font-black text-white/5 pointer-events-none group-hover:text-white/10 transition-colors">03</div>
-                                <h3 className="font-display font-bold text-4xl text-cream mb-6 relative z-10">Returning to Roots</h3>
+                                <h3 className="font-display font-bold text-4xl text-cream mb-6 relative z-10">A Deeper Purpose</h3>
                                 <p className="font-body text-lg text-cream/80 leading-relaxed mb-6 relative z-10">
-                                    Following his retirement in 1999, he continued to share his expertise as an international consultant. But his heart remained in Kerala.
+                                    Beyond his professional achievements lies a deeper purpose. Having experienced financial hardship in his early years, Dr. Pankaj understands the struggles many young students face today. His vision is simple yet powerful: no deserving student should be denied an education because of financial limitations.
                                 </p>
                                 <p className="font-body text-lg text-cream/80 leading-relaxed relative z-10">
-                                    He has since returned to India, dedicating his life and personal savings to the trust. His mission ensures that the same financial barriers he faced will not stop the next generation of bright students from achieving their dreams.
+                                    Through this trust, built on that very belief, support reaches bright, hardworking students from economically disadvantaged backgrounds. For many, even modest assistance has been life-changing—opening doors to education, confidence, and a better future.
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -136,6 +142,32 @@ export default function Inspiration() {
                         </ScrollReveal>
                     </div>
 
+                </div>
+            </section>
+
+            {/* Founder's Message Section */}
+            <section className="py-24 bg-charcoal relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10" />
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
+                    <ScrollReveal direction="up">
+                        <span className="inline-block px-4 py-1 rounded-full bg-saffron/10 border border-saffron/20 text-saffron font-display font-bold text-sm tracking-widest uppercase mb-8">
+                            A Message to Every Young Mind
+                        </span>
+                        <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl text-white mb-12 leading-tight">
+                            "No matter your circumstances today, your <span className="text-transparent bg-clip-text bg-gradient-to-r from-saffron to-gold">determination</span> can shape a brighter tomorrow."
+                        </h2>
+                        <div className="flex flex-col items-center">
+                            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-saffron/30 mb-4 p-1">
+                                <img 
+                                    src="/images/dr-pankaj.jpg" 
+                                    alt="Dr. Pankaj" 
+                                    className="w-full h-full object-cover rounded-full grayscale"
+                                    onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1507676184212-d0c30a47bfb0?auto=format&fit=crop&q=80&w=800"; }}
+                                />
+                            </div>
+                            <p className="font-display font-bold text-xl text-gold italic">— Dr. Pankaj</p>
+                        </div>
+                    </ScrollReveal>
                 </div>
             </section>
         </PublicLayout>
